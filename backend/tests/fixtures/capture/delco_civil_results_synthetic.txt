@@ -1,0 +1,4 @@
+Case Number	Case Classification	Status	Party	Filing Date
+CV-2023-004512	Municipal Lien	Open	SAMPLE OWNER A	02/08/2023
+CV-2022-001199	Civil - Contract	Closed	SAMPLE OWNER A	07/19/2022
+CV-2025-000077	Mechanics Lien Claim	Open	SAMPLE OWNER A	01/13/2025

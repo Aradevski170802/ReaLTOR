@@ -1,0 +1,6 @@
+-r requirements.txt
+pytest>=8.3
+respx>=0.21
+ruff>=0.7
+# Only needed to regenerate anonymized PDF test fixtures (scripts/make_pdf_fixtures.py)
+pymupdf>=1.24

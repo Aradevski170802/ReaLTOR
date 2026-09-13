@@ -1,0 +1,620 @@
+{
+  "generated_at": "2026-09-13T12:20:38+00:00",
+  "method": "Paired GIS_BOA_LAND codes with descriptions recorded per parcel in a reviewed reference workbook",
+  "source_gis": "https://gis.montcopa.org/arcgis/rest/services/Parcels/GIS_BOA_LAND/FeatureServer/0/query",
+  "reference_parcels": 364,
+  "class": {
+    "R": {
+      "description": "Residential",
+      "support": null
+    },
+    "C": {
+      "description": "Commercial",
+      "support": null
+    },
+    "A": {
+      "description": "Apartment",
+      "support": null
+    },
+    "I": {
+      "description": "Industrial",
+      "support": null
+    },
+    "F": {
+      "description": "Farm",
+      "support": null
+    },
+    "E": {
+      "description": "Exempt",
+      "support": null
+    },
+    "U": {
+      "description": "Utility",
+      "support": null
+    },
+    "M": {
+      "description": "Mixed",
+      "support": null
+    }
+  },
+  "land_use": {
+    "0319": {
+      "description": "R - PREFERENTIAL ASSESSMENT",
+      "support": 2,
+      "conflicts": null
+    },
+    "1101": {
+      "description": "R - SINGLE FAMILY",
+      "support": 202,
+      "conflicts": null
+    },
+    "1108": {
+      "description": "R - MORE THAN 1 HOUSE, DETACHED",
+      "support": 1,
+      "conflicts": null
+    },
+    "1110": {
+      "description": "R - GARAGE ON LOT",
+      "support": 1,
+      "conflicts": null
+    },
+    "1132": {
+      "description": "R - DUPLEX",
+      "support": 11,
+      "conflicts": null
+    },
+    "1134": {
+      "description": "R - TRIPLEX",
+      "support": 1,
+      "conflicts": null
+    },
+    "1136": {
+      "description": "R - QUADRAPLEX",
+      "support": 1,
+      "conflicts": null
+    },
+    "1140": {
+      "description": "C - RESIDENTIAL CONVERSION 5 OR MORE APT",
+      "support": 1,
+      "conflicts": null
+    },
+    "1145": {
+      "description": "C - ROOMING HOUSE - TOURIST HOME",
+      "support": 1,
+      "conflicts": null
+    },
+    "1160": {
+      "description": "C - RESIDENTIAL-COMMERCIAL NON-CONFORM",
+      "support": 1,
+      "conflicts": null
+    },
+    "1161": {
+      "description": "C - RESIDENTIAL/PROFESSIONAL",
+      "support": 1,
+      "conflicts": null
+    },
+    "1188": {
+      "description": "R - CONDO TOWNHOUSE",
+      "support": 6,
+      "conflicts": null
+    },
+    "1200": {
+      "description": "R - CONDO GARAGE",
+      "support": 2,
+      "conflicts": null
+    },
+    "1201": {
+      "description": "R - CONDO GARDEN STYLE-PRIVATE ENT. 1-3S",
+      "support": 3,
+      "conflicts": null
+    },
+    "1202": {
+      "description": "R - CONDO GARDEN STYLE-COMMON ENT. 1-3S",
+      "support": 4,
+      "conflicts": null
+    },
+    "1203": {
+      "description": "R - CONDOMINIUM MID RISE 4-6 STORIES",
+      "support": 2,
+      "conflicts": null
+    },
+    "1204": {
+      "description": "R - CONDOMINIUM HIGH RISE 7 + STORIES",
+      "support": 12,
+      "conflicts": null
+    },
+    "1220": {
+      "description": "R - MOBILE HOME - OWNER'S LOT",
+      "support": 1,
+      "conflicts": null
+    },
+    "1221": {
+      "description": "R - MOBILE HOME - RENTED LOT - PARK",
+      "support": 19,
+      "conflicts": null
+    },
+    "1222": {
+      "description": "R - MANUFACTURED HOME - RENTED LOT",
+      "support": 5,
+      "conflicts": null
+    },
+    "1901": {
+      "description": "E - EXEMPT DWELLING VETERANS",
+      "support": 1,
+      "conflicts": null
+    },
+    "2101": {
+      "description": "R - RES VAC LAND UNDER 5000 SQ FT",
+      "support": 11,
+      "conflicts": null
+    },
+    "2102": {
+      "description": "R - RES VAC LAND 5000-10000 SQ FT",
+      "support": 4,
+      "conflicts": null
+    },
+    "2103": {
+      "description": "R - RES VAC LAND 10001-20000 SQ FT",
+      "support": 3,
+      "conflicts": null
+    },
+    "2104": {
+      "description": "R - RES VAC LAND 20001-30000 SQ FT",
+      "support": 2,
+      "conflicts": null
+    },
+    "2106": {
+      "description": "R - RES VAC LAND 40001-60000 SQ FT",
+      "support": 3,
+      "conflicts": null
+    },
+    "2109": {
+      "description": "R - RES VAC LAND  5.00- 9.99 ACRES",
+      "support": 1,
+      "conflicts": null
+    },
+    "2202": {
+      "description": "C - COM VAC LAND 5000-10000 SQ FT",
+      "support": 1,
+      "conflicts": null
+    },
+    "2203": {
+      "description": "C - COM VAC LAND 10001-20000 SQ FT",
+      "support": 1,
+      "conflicts": null
+    },
+    "2208": {
+      "description": "C - COM VAC LAND  2.00- 4.99 ACRES",
+      "support": 1,
+      "conflicts": null
+    },
+    "2306": {
+      "description": "I - IND VAC LAND 40001-60000 SQ FT",
+      "support": 1,
+      "conflicts": null
+    },
+    "3320": {
+      "description": "I - IND:ONE STORY WHSE/MFG UP TO 15000 S",
+      "support": 2,
+      "conflicts": null
+    },
+    "3321": {
+      "description": "I - IND:MUL STORY WHSE/MFG UP TO 15000 S",
+      "support": 1,
+      "conflicts": null
+    },
+    "3324": {
+      "description": "I - IND:MUL STORY WHSE/MFG 15-25000 S.F.",
+      "support": 1,
+      "conflicts": null
+    },
+    "3326": {
+      "description": "I - IND:MUL STORY WHSE/MFG 25-50000 S.F.",
+      "support": 1,
+      "conflicts": null
+    },
+    "3331": {
+      "description": "I - IND:MUL STORY WHSE/MFG 50-100000 S.F",
+      "support": 1,
+      "conflicts": null
+    },
+    "4100": {
+      "description": "C - RETAIL, OFFICE, APTS. - MULTI-USE",
+      "support": 25,
+      "conflicts": null
+    },
+    "4230": {
+      "description": "C - DEPARTMENT STORE",
+      "support": 1,
+      "conflicts": null
+    },
+    "4237": {
+      "description": "C - AUTOMOBILE SHOWROOM",
+      "support": 3,
+      "conflicts": null
+    },
+    "4240": {
+      "description": "C - BANK",
+      "support": 1,
+      "conflicts": null
+    },
+    "4249": {
+      "description": "C - CONTRACTOR'S FACILITIES",
+      "support": 1,
+      "conflicts": null
+    },
+    "4275": {
+      "description": "C - PARKING LOTS",
+      "support": 5,
+      "conflicts": null
+    },
+    "4280": {
+      "description": "C - REPAIR SHOP OR GARAGES",
+      "support": 3,
+      "conflicts": null
+    },
+    "4281": {
+      "description": "C - RESTAURANT W/LIQUOR LICENSE",
+      "support": 1,
+      "conflicts": null
+    },
+    "4282": {
+      "description": "C - RESTAURANT WITHOUT LIQUOR LICENSE",
+      "support": 1,
+      "conflicts": null
+    },
+    "4283": {
+      "description": "C - RETAIL AND SHOP",
+      "support": 1,
+      "conflicts": null
+    },
+    "4285": {
+      "description": "C - RETAIL STAND ALONE 8,000 SF + UNDER",
+      "support": 1,
+      "conflicts": null
+    },
+    "4326": {
+      "description": "C - OFFICE: MUL STORY 15000-50000 S.F.",
+      "support": 2,
+      "conflicts": null
+    },
+    "4343": {
+      "description": "C - PHARMACEUTICAL FACILITY",
+      "support": 1,
+      "conflicts": null
+    },
+    "4345": {
+      "description": "C - COMMERCIAL CONDO",
+      "support": 2,
+      "conflicts": null
+    },
+    "5000": {
+      "description": "C - TAXABLE MISCELLANOUS",
+      "support": 1,
+      "conflicts": null
+    },
+    "5130": {
+      "description": "C - TAXABLE HOSPITALS, MEDICAL FACILITY",
+      "support": 2,
+      "conflicts": null
+    },
+    "5140": {
+      "description": "C - TAXABLE NURSING HOMES, SANITORIUMS",
+      "support": 1,
+      "conflicts": null
+    }
+  },
+  "school_district": {
+    "030": {
+      "description": "ABINGTON",
+      "support": 34,
+      "conflicts": null
+    },
+    "075": {
+      "description": "BOYERTOWN AREA",
+      "support": 11,
+      "conflicts": null
+    },
+    "130": {
+      "description": "CHELTENHAM TOWNSHIP",
+      "support": 18,
+      "conflicts": null
+    },
+    "160": {
+      "description": "COLONIAL",
+      "support": 28,
+      "conflicts": null
+    },
+    "360": {
+      "description": "HATBORO-HORSHAM",
+      "support": 14,
+      "conflicts": null
+    },
+    "380": {
+      "description": "JENKINTOWN",
+      "support": 1,
+      "conflicts": null
+    },
+    "450": {
+      "description": "LOWER MERION",
+      "support": 31,
+      "conflicts": null
+    },
+    "460": {
+      "description": "LOWER MORELAND TWP",
+      "support": 2,
+      "conflicts": null
+    },
+    "530": {
+      "description": "METHACTON",
+      "support": 18,
+      "conflicts": null
+    },
+    "560": {
+      "description": "NORRISTOWN AREA",
+      "support": 35,
+      "conflicts": null
+    },
+    "570": {
+      "description": "NORTH PENN",
+      "support": 33,
+      "conflicts": null
+    },
+    "610": {
+      "description": "PERKIOMEN VALLEY",
+      "support": 5,
+      "conflicts": null
+    },
+    "630": {
+      "description": "POTTSGROVE",
+      "support": 14,
+      "conflicts": null
+    },
+    "640": {
+      "description": "POTTSTOWN",
+      "support": 34,
+      "conflicts": null
+    },
+    "710": {
+      "description": "SOUDERTON AREA",
+      "support": 7,
+      "conflicts": null
+    },
+    "720": {
+      "description": "SPRINGFIELD TWP",
+      "support": 11,
+      "conflicts": null
+    },
+    "730": {
+      "description": "SPRING FORD AREA",
+      "support": 18,
+      "conflicts": null
+    },
+    "830": {
+      "description": "UPPER DUBLIN",
+      "support": 5,
+      "conflicts": null
+    },
+    "840": {
+      "description": "UPPER MERION AREA",
+      "support": 23,
+      "conflicts": null
+    },
+    "850": {
+      "description": "UPPER MORELAND TWP",
+      "support": 7,
+      "conflicts": null
+    },
+    "860": {
+      "description": "UPPER PERKIOMEN",
+      "support": 7,
+      "conflicts": null
+    },
+    "930": {
+      "description": "WISSAHICKON",
+      "support": 8,
+      "conflicts": null
+    }
+  },
+  "style": {
+    "01": {
+      "description": "BILEVEL",
+      "support": 3,
+      "conflicts": null
+    },
+    "02": {
+      "description": "SPLIT LEVEL",
+      "support": 12,
+      "conflicts": null
+    },
+    "03": {
+      "description": "RANCH",
+      "support": 37,
+      "conflicts": null
+    },
+    "04": {
+      "description": "ROW",
+      "support": 10,
+      "conflicts": null
+    },
+    "05": {
+      "description": "OLD COLONIAL",
+      "support": 48,
+      "conflicts": null
+    },
+    "06": {
+      "description": "BUNGALOW",
+      "support": 19,
+      "conflicts": null
+    },
+    "07": {
+      "description": "COLONIAL",
+      "support": 27,
+      "conflicts": null
+    },
+    "08": {
+      "description": "CAPE COD",
+      "support": 20,
+      "conflicts": null
+    },
+    "09": {
+      "description": "TWIN",
+      "support": 25,
+      "conflicts": null
+    },
+    "10": {
+      "description": "TOWNHOUSE",
+      "support": 12,
+      "conflicts": null
+    },
+    "12": {
+      "description": "CONTEMPORARY",
+      "support": 2,
+      "conflicts": null
+    },
+    "14": {
+      "description": "OTHER",
+      "support": 2,
+      "conflicts": null
+    },
+    "15": {
+      "description": "CONDOMINIUM",
+      "support": 27,
+      "conflicts": null
+    },
+    "18": {
+      "description": "FARM HOUSE",
+      "support": 1,
+      "conflicts": null
+    },
+    "24": {
+      "description": "SINGLE WIDE MH",
+      "support": 11,
+      "conflicts": null
+    },
+    "25": {
+      "description": "DOUBLE WIDE MH",
+      "support": 13,
+      "conflicts": null
+    }
+  },
+  "exterior_wall": {
+    "1": {
+      "description": "FRAME",
+      "support": 19,
+      "conflicts": null
+    },
+    "2": {
+      "description": "BRICK",
+      "support": 63,
+      "conflicts": null
+    },
+    "3": {
+      "description": "MAS&FRAME",
+      "support": 13,
+      "conflicts": null
+    },
+    "4": {
+      "description": "BLOCK",
+      "support": 2,
+      "conflicts": null
+    },
+    "5": {
+      "description": "STUCCO",
+      "support": 52,
+      "conflicts": null
+    },
+    "6": {
+      "description": "ALUM/VINYL",
+      "support": 89,
+      "conflicts": null
+    },
+    "7": {
+      "description": "STONE",
+      "support": 12,
+      "conflicts": null
+    },
+    "8": {
+      "description": "ASBESTOS",
+      "support": 18,
+      "conflicts": null
+    },
+    "9": {
+      "description": "CONCRETE",
+      "support": 1,
+      "conflicts": null
+    }
+  },
+  "structure": {
+    "105": {
+      "description": "MIXED RESIDENTIAL/COMMERCIAL",
+      "support": 20,
+      "conflicts": null
+    },
+    "318": {
+      "description": "BRDING-ROOMING HOUSE",
+      "support": 1,
+      "conflicts": null
+    },
+    "319": {
+      "description": "MIXED RES/COMM",
+      "support": 2,
+      "conflicts": null
+    },
+    "321": {
+      "description": "RESTAURANT",
+      "support": 1,
+      "conflicts": null
+    },
+    "331": {
+      "description": "AUTO DEALER/F-SEVICE",
+      "support": 2,
+      "conflicts": null
+    },
+    "332": {
+      "description": "AUTO SERVICE GARAGE",
+      "support": 2,
+      "conflicts": null
+    },
+    "351": {
+      "description": "BANK",
+      "support": 1,
+      "conflicts": null
+    },
+    "353": {
+      "description": "OFFICE BLDG L/R 1-4S",
+      "support": 2,
+      "conflicts": null
+    },
+    "355": {
+      "description": "OFFICE CONDOMINIUM",
+      "support": 2,
+      "conflicts": null
+    },
+    "371": {
+      "description": "DOWNTOWN ROW TYPE",
+      "support": 9,
+      "conflicts": null
+    },
+    "373": {
+      "description": "RETAIL SINGLE OCCUP",
+      "support": 3,
+      "conflicts": null
+    },
+    "374": {
+      "description": "RETAIL MULTI OCCUP",
+      "support": 1,
+      "conflicts": null
+    },
+    "398": {
+      "description": "WAREHOUSE",
+      "support": 4,
+      "conflicts": null
+    },
+    "401": {
+      "description": "MFG/PROCESSING",
+      "support": 2,
+      "conflicts": null
+    }
+  }
+}

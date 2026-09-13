@@ -1,0 +1,1105 @@
+{
+  "source_filename": "Montgomery County Upset Sale 2026 - Completed (Refined Schema) final 2.xlsx",
+  "sheets": [
+    {
+      "title": "Updated Sale List",
+      "freeze_panes": "D2",
+      "auto_filter": "A1:AC365",
+      "header_row_height": 36.0,
+      "data_row_height": 45.0,
+      "row_count": 364,
+      "columns": [
+        {
+          "letter": "A",
+          "header": "Municipality",
+          "width": 16.0,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "B",
+          "header": "Sale Number",
+          "width": 12.0,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "C",
+          "header": "Parcel",
+          "width": 18.0,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "D",
+          "header": "Owner Name",
+          "width": 22.0,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "E",
+          "header": "Location",
+          "width": 34.0,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "F",
+          "header": "Approx. Sale Price",
+          "width": 14.0,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "G",
+          "header": "Land Use Description",
+          "width": 17.5703125,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "H",
+          "header": "School District",
+          "width": 14.42578125,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 11.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "I",
+          "header": "Assessed Value",
+          "width": 16.0,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 11.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": null
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": false,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "J",
+          "header": "Lot Size",
+          "width": 10.5703125,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "K",
+          "header": "Building Style (R-)",
+          "width": 10.5703125,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "L",
+          "header": "Year Built",
+          "width": 8.140625,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "M",
+          "header": "Exterior Wall Material (R-)",
+          "width": 8.0,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "N",
+          "header": "Sq Ft Living Area (R-)",
+          "width": 7.140625,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "O",
+          "header": "Total Rooms (R-)",
+          "width": 4.5703125,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "P",
+          "header": "Bedrooms (R-)",
+          "width": 6.5703125,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "Q",
+          "header": "Bathrooms (R-)",
+          "width": 5.28515625,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "R",
+          "header": "Half Baths (R-)",
+          "width": 4.5703125,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "S",
+          "header": "Sale Date",
+          "width": 10.7109375,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "T",
+          "header": "Sale Price",
+          "width": 9.7109375,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "U",
+          "header": "Gross Building Area (C-)",
+          "width": 9.0,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "V",
+          "header": "Total Living Units (C-)",
+          "width": 7.7109375,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "W",
+          "header": "Structure (C-)",
+          "width": 14.42578125,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "X",
+          "header": "Homes.com (min of range)",
+          "width": 11.42578125,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "Y",
+          "header": "Zillow Zestimate",
+          "width": 10.5703125,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "Z",
+          "header": "Realtor.com Real Estimate",
+          "width": 9.85546875,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "AA",
+          "header": "Redfin Median Sale Price",
+          "width": 10.5703125,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "AB",
+          "header": "Trulia Estimate",
+          "width": 11.140625,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "AC",
+          "header": "Lowest Across Sites",
+          "width": null,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "AD",
+          "header": "Market Value Flag",
+          "width": 14.42578125,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "AE",
+          "header": "Property Photo",
+          "width": 30.0,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "AF",
+          "header": "Tax 2024 Total",
+          "width": 16.0,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "\"$\"#,##0.00"
+          ],
+          "data_wrap": false,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "AG",
+          "header": "Tax 2025 Total",
+          "width": null,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "\"$\"#,##0.00",
+            "General"
+          ],
+          "data_wrap": false,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "AH",
+          "header": "2024 Balance",
+          "width": null,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "\"$\"#,##0.00"
+          ],
+          "data_wrap": false,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "AI",
+          "header": "Tax Claim Delinquent Total",
+          "width": 11.140625,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "\"$\"#,##0.00"
+          ],
+          "data_wrap": false,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "AJ",
+          "header": "Mortgage Summary",
+          "width": 15.85546875,
+          "header_fill": "FF01696F",
+          "header_font": {
+            "name": "Calibri",
+            "size": 10.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": true,
+          "data_font_size": 11.0
+        }
+      ],
+      "fill_colors_used": {
+        "FFFF0000": 787,
+        "FFFFC000": 104,
+        "FF00B050": 84
+      },
+      "conditional_formatting": []
+    },
+    {
+      "title": "Mortgage Info",
+      "freeze_panes": "A2",
+      "auto_filter": "A1:K5166",
+      "header_row_height": 30.0,
+      "data_row_height": null,
+      "row_count": 5165,
+      "columns": [
+        {
+          "letter": "A",
+          "header": "Parcel",
+          "width": 16.0,
+          "header_fill": "FF424242",
+          "header_font": {
+            "name": "Calibri",
+            "size": 11.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": false,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "B",
+          "header": "Municipality",
+          "width": 14.0,
+          "header_fill": "FF424242",
+          "header_font": {
+            "name": "Calibri",
+            "size": 11.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": false,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "C",
+          "header": "Instrument",
+          "width": 18.0,
+          "header_fill": "FF424242",
+          "header_font": {
+            "name": "Calibri",
+            "size": 11.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": false,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "D",
+          "header": "Type",
+          "width": 28.0,
+          "header_fill": "FF424242",
+          "header_font": {
+            "name": "Calibri",
+            "size": 11.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": false,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "E",
+          "header": "Recorded Date",
+          "width": 13.0,
+          "header_fill": "FF424242",
+          "header_font": {
+            "name": "Calibri",
+            "size": 11.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": false,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "F",
+          "header": "Grantor",
+          "width": 28.0,
+          "header_fill": "FF424242",
+          "header_font": {
+            "name": "Calibri",
+            "size": 11.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": false,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "G",
+          "header": "Grantee",
+          "width": null,
+          "header_fill": "FF424242",
+          "header_font": {
+            "name": "Calibri",
+            "size": 11.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": false,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "H",
+          "header": "Mortgage Amt",
+          "width": 14.0,
+          "header_fill": "FF424242",
+          "header_font": {
+            "name": "Calibri",
+            "size": 11.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": false,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "I",
+          "header": "Satisfied",
+          "width": 10.0,
+          "header_fill": "FF424242",
+          "header_font": {
+            "name": "Calibri",
+            "size": 11.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": false,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "J",
+          "header": "Assoc Instruments",
+          "width": 22.0,
+          "header_fill": "FF424242",
+          "header_font": {
+            "name": "Calibri",
+            "size": 11.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": false,
+          "data_font_size": 11.0
+        },
+        {
+          "letter": "K",
+          "header": "Document Status",
+          "width": 16.0,
+          "header_fill": "FF424242",
+          "header_font": {
+            "name": "Calibri",
+            "size": 11.0,
+            "bold": true,
+            "color": "FFFFFFFF"
+          },
+          "header_alignment": {
+            "horizontal": "center",
+            "vertical": "center",
+            "wrap": true
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": false,
+          "data_font_size": 11.0
+        }
+      ],
+      "fill_colors_used": {
+        "FF00B050": 5137,
+        "FFFF0000": 1837
+      },
+      "conditional_formatting": []
+    },
+    {
+      "title": "Notes & Legend",
+      "freeze_panes": null,
+      "auto_filter": null,
+      "header_row_height": 16.5,
+      "data_row_height": null,
+      "row_count": 37,
+      "columns": [
+        {
+          "letter": "A",
+          "header": "How to use this workbook",
+          "width": 110.0,
+          "header_fill": null,
+          "header_font": {
+            "name": "Arial",
+            "size": 13.0,
+            "bold": true,
+            "color": null
+          },
+          "header_alignment": {
+            "horizontal": null,
+            "vertical": null,
+            "wrap": null
+          },
+          "data_number_formats": [
+            "General"
+          ],
+          "data_wrap": false,
+          "data_font_size": 10.0
+        }
+      ],
+      "fill_colors_used": {},
+      "conditional_formatting": []
+    }
+  ]
+}

@@ -1,0 +1,242 @@
+{
+ "objectIdFieldName": "OBJECT_ID",
+ "globalIdFieldName": "",
+ "fields": [
+  {
+   "name": "PARCEL_NUMBER",
+   "alias": "PARCEL_NUMBER",
+   "type": "esriFieldTypeString",
+   "length": 30
+  },
+  {
+   "name": "CLASS",
+   "alias": "CLASS",
+   "type": "esriFieldTypeString",
+   "length": 4
+  },
+  {
+   "name": "LAND_USE",
+   "alias": "LAND_USE",
+   "type": "esriFieldTypeString",
+   "length": 4
+  },
+  {
+   "name": "TOTAL_ASSESSMENT",
+   "alias": "TOTAL_ASSESSMENT",
+   "type": "esriFieldTypeInteger"
+  },
+  {
+   "name": "SCH_DIST",
+   "alias": "SCH_DIST",
+   "type": "esriFieldTypeString",
+   "length": 5
+  },
+  {
+   "name": "MUNI_CODE",
+   "alias": "MUNI_CODE",
+   "type": "esriFieldTypeString",
+   "length": 5
+  },
+  {
+   "name": "LAND_ACRES",
+   "alias": "LAND_ACRES",
+   "type": "esriFieldTypeSingle"
+  },
+  {
+   "name": "LAND_SF",
+   "alias": "LAND_SF",
+   "type": "esriFieldTypeInteger"
+  },
+  {
+   "name": "FRONTFT",
+   "alias": "FRONTFT",
+   "type": "esriFieldTypeString",
+   "length": 7
+  },
+  {
+   "name": "STYLE",
+   "alias": "STYLE",
+   "type": "esriFieldTypeString",
+   "length": 2
+  },
+  {
+   "name": "EXTWALL",
+   "alias": "EXTWALL",
+   "type": "esriFieldTypeString",
+   "length": 2
+  },
+  {
+   "name": "SFLA",
+   "alias": "SFLA",
+   "type": "esriFieldTypeInteger"
+  },
+  {
+   "name": "RM_TOT",
+   "alias": "RM_TOT",
+   "type": "esriFieldTypeString",
+   "length": 10
+  },
+  {
+   "name": "BEDROOMS",
+   "alias": "BEDROOMS",
+   "type": "esriFieldTypeString",
+   "length": 10
+  },
+  {
+   "name": "BATHS",
+   "alias": "BATHS",
+   "type": "esriFieldTypeString",
+   "length": 10
+  },
+  {
+   "name": "HALF_BATHS",
+   "alias": "HALF_BATHS",
+   "type": "esriFieldTypeString",
+   "length": 10
+  },
+  {
+   "name": "YEAR_BUILT",
+   "alias": "YEAR_BUILT",
+   "type": "esriFieldTypeString",
+   "length": 10
+  },
+  {
+   "name": "SALE_DATE",
+   "alias": "SALE_DATE",
+   "type": "esriFieldTypeString",
+   "length": 10
+  },
+  {
+   "name": "CONSIDERATION",
+   "alias": "CONSIDERATION",
+   "type": "esriFieldTypeInteger"
+  },
+  {
+   "name": "COMM_AREA",
+   "alias": "COMM_AREA",
+   "type": "esriFieldTypeInteger"
+  },
+  {
+   "name": "COMM_NLA",
+   "alias": "COMM_NLA",
+   "type": "esriFieldTypeInteger"
+  },
+  {
+   "name": "COMM_UNITS",
+   "alias": "COMM_UNITS",
+   "type": "esriFieldTypeInteger"
+  },
+  {
+   "name": "LIV_UNITS",
+   "alias": "LIV_UNITS",
+   "type": "esriFieldTypeString",
+   "length": 3
+  },
+  {
+   "name": "STRUCTURE",
+   "alias": "STRUCTURE",
+   "type": "esriFieldTypeString",
+   "length": 3
+  },
+  {
+   "name": "USE_TYPE",
+   "alias": "USE_TYPE",
+   "type": "esriFieldTypeString",
+   "length": 3
+  },
+  {
+   "name": "COMM_YR_BLT",
+   "alias": "COMM_YR_BLT",
+   "type": "esriFieldTypeString",
+   "length": 10
+  },
+  {
+   "name": "LOCATION1",
+   "alias": "LOCATION1",
+   "type": "esriFieldTypeString",
+   "length": 69
+  },
+  {
+   "name": "LOCATION2",
+   "alias": "LOCATION2",
+   "type": "esriFieldTypeString",
+   "length": 21
+  },
+  {
+   "name": "LOC_ZIP1_ZIP2",
+   "alias": "LOC_ZIP1_ZIP2",
+   "type": "esriFieldTypeString",
+   "length": 10
+  },
+  {
+   "name": "OWN1",
+   "alias": "OWN1",
+   "type": "esriFieldTypeString",
+   "length": 40
+  },
+  {
+   "name": "OWN2",
+   "alias": "OWN2",
+   "type": "esriFieldTypeString",
+   "length": 40
+  },
+  {
+   "name": "DEED_BOOK",
+   "alias": "DEED_BOOK",
+   "type": "esriFieldTypeString",
+   "length": 8
+  },
+  {
+   "name": "DEED_PAGE",
+   "alias": "DEED_PAGE",
+   "type": "esriFieldTypeString",
+   "length": 8
+  },
+  {
+   "name": "ASMT_CHGDATE",
+   "alias": "ASMT_CHGDATE",
+   "type": "esriFieldTypeString",
+   "length": 10
+  }
+ ],
+ "features": [
+  {
+   "attributes": {
+    "PARCEL_NUMBER": "020002904001                  ",
+    "CLASS": "C   ",
+    "LAND_USE": "4280",
+    "TOTAL_ASSESSMENT": 52070,
+    "SCH_DIST": "840  ",
+    "MUNI_CODE": "02   ",
+    "LAND_ACRES": 0.10100000351667404,
+    "LAND_SF": 4400,
+    "FRONTFT": "56     ",
+    "STYLE": "  ",
+    "EXTWALL": "  ",
+    "SFLA": 0,
+    "RM_TOT": "          ",
+    "BEDROOMS": "          ",
+    "BATHS": "          ",
+    "HALF_BATHS": "          ",
+    "YEAR_BUILT": "          ",
+    "SALE_DATE": "02/24/1994",
+    "CONSIDERATION": 1,
+    "COMM_AREA": 0,
+    "COMM_NLA": 0,
+    "COMM_UNITS": 0,
+    "LIV_UNITS": "   ",
+    "STRUCTURE": "   ",
+    "USE_TYPE": "   ",
+    "COMM_YR_BLT": "          ",
+    "LOCATION1": "134 W FRONT ST                                                  ",
+    "LOCATION2": "                    ",
+    "LOC_ZIP1_ZIP2": "19405     ",
+    "OWN1": "SAMPLE OWNER",
+    "OWN2": "",
+    "DEED_BOOK": "5079    ",
+    "DEED_PAGE": "00161   ",
+    "ASMT_CHGDATE": "01/06/2026"
+   }
+  }
+ ]
+}

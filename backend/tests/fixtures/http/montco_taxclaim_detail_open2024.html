@@ -1,0 +1,438 @@
+<!-- SYNTHETIC VARIANT (2024 claim marked unpaid) of fixture: Montgomery County Tax Claim Bureau page captured 2026-09-13; owner name anonymized. -->
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>
+
+</title><link href="Styles/web.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery-1.12.0.min.js" ></script>
+    
+    <script>
+        function navigateToResults() {
+            $('#form1').attr('target', '_self')
+            $('#form1').attr('action', './ParcelList.aspx')
+            $('#form1').submit()
+        }
+        function navigateToPrintPage() {
+            $('#form1').attr('target', '_self')
+            $('#form1').attr('action', './ParcelPrint.aspx')
+            $('#form1').submit()
+        }
+    </script>
+</head>
+<body class="PageBody">
+    <div id="headerContent">
+        <div id="pnlHeader" style="background-color:#424242;height:125px;">
+	
+            <table style="width:985px; table-layout:fixed;" cellpadding="5">
+                <tr>
+                    <td style="width:300px"></td>
+                    <td style="width:200px"><img src="Images/seal.png" /></td>
+                    <td style="width:485px"><img src="Images/county.png" /></td>
+                </tr>
+            </table>
+        
+</div>
+    </div>
+    <div id="mainContent" >
+        
+<form id="form1" method="post" action="./ParcelInfo.aspx">
+    <table id="tbtMain" style="width:985px; table-layout:fixed;" cellpadding="5">
+	<tr>
+		<td style="text-align:left;" colspan="2">
+                <div id="BreadCrumbs" style="float: left; padding: 0 75px 0 0; margin:0px 0px 10px 0px;">
+                    <span class="BreadLeader">You are here:</span>
+                    <span class="BreadLink">
+                        <a class="CrumbLink" href="http://www.montcopa.org/index.aspx">Home</a> &gt;
+                        <a class="CrumbLink" href="http://www.montcopa.org/index.aspx?NID=8">Departments</a> &gt;
+                        <a class="CrumbLink" href="http://www.montcopa.org/index.aspx?NID=855">County Administration</a> &gt;
+                        <a class="CrumbLink" href="http://www.montcopa.org/index.aspx?NID=283">Tax Claim Bureau</a> &gt;
+                        <a class="CrumbLink" href="./Search.aspx">Parcel Search</a> &gt;
+                    </span>
+                    <span class="BreadPage">Parcel Details</span>
+                </div>
+                <br style="clear: left;">
+            </td>
+	</tr>
+	<tr>
+		<td style="word-wrap:break-word; text-align:left;" colspan="2">
+                <div id="lblHeader" style=" border-bottom: 2px solid #CCCCA5; padding-bottom: 3px; margin-bottom: 12px;" class="Headline">Parcel Search Result 1 of 1</div>
+            </td>
+	</tr>
+	<tr>
+		<td style="word-wrap:break-word; text-align:right;" colspan="2">
+                <input onclick="navigateToResults()" type="button" value="Return to Results" style="width:130px;" class="CommandButton" />
+                <input name="btnPrevious" type="submit" id="btnPrevious" value="&lt; Previous" class="CommandButton" />
+                <input name="btnNext" type="submit" id="btnNext" value="Next >" class="CommandButton" disabled="disabled" />
+                <input onclick="window.navigate('Search.aspx');" type="button" value="New Search" class="CommandButton" />
+                <input onclick="navigateToPrintPage()" type="button" value="Print Page" class="CommandButton" name="print" id="print" />
+
+                <input name="entity" type="hidden" id="entity" value="9b84d400-a0eb-e511-8127-c4346bb588c8" />
+                <input name="entities" type="hidden" id="entities" value="9b84d400-a0eb-e511-8127-c4346bb588c8" />
+            </td>
+	</tr>
+	<tr>
+		<td style="word-wrap:break-word; text-align:left;" colspan="2">
+                
+                
+            </td>
+	</tr>
+	<tr>
+		<td style="word-wrap:break-word; text-align:left; vertical-align:top;">
+                <table id="tblParcel" style="width:500px; table-layout:fixed;" cellpadding="2">
+			<tr>
+				<td>Parcel Number:</td>
+				<td><span id="lblParcelNum">02-00-02904-00-1</span></td>
+			</tr>
+			<tr>
+				<td>Deed Book - Page:</td>
+				<td><span id="lblDeedInfo">5079-00161</span></td>
+			</tr>
+			<tr>
+				<td>Name:</td>
+				<td><span id="lblBillName">SAMPLE OWNER A </span></td>
+			</tr>
+			<tr>
+				<td>Address:</td>
+				<td><span id="lblAddress">134 W FRONT ST <br/>BRIDGEPORT PA 19405</span></td>
+			</tr>
+			<tr>
+				<td>Location:</td>
+				<td><span id="lblLocation">134 W FRONT ST</span></td>
+			</tr>
+			<tr>
+				<td>District:</td>
+				<td><span id="lblDistrict"> Bridgeport (Borough)</span></td>
+			</tr>
+			<tr>
+				<td>Description:</td>
+				<td><span id="lblDescription">REPAIR SHOP OR GARAGES</span></td>
+			</tr>
+			<tr>
+				<td>Assessed Value:</td>
+				<td><span id="lblAssessedValue">52,070</span></td>
+			</tr>
+		</table>
+		
+            </td>
+		<td style="word-wrap:break-word; text-align:center; vertical-align:top; padding-left:50px;">
+                
+                <table id="tblPayment" cellpadding="2" style="width:100%;">
+			<tr>
+				<td class="centerAlign" colspan="3" style="font-weight:bold;">
+                            
+                            Delinquent Taxes Due as of 9/13/2026&nbsp; 7:59 AM<br />(interest charged monthly)
+                        </td>
+			</tr><tr>
+				<th class="rightAlign" style="font-style:italic;">2025</th><th class="rightAlign" style="font-style:italic;">$7,291.94</th><th></th>
+			</tr><tr>
+				<th class="rightAlign" style="font-style:italic;">Total</th><th class="rightAlign" style="font-style:italic;">$7,291.94</th>
+			</tr><tr>
+				<td colspan="3"></td>
+			</tr><tr>
+				<td colspan="3"><span id="lblPaymetMessage" class="centerAlign" style="color:#FF6A00;"></span></td>
+			</tr><tr>
+				<td class="rightAlign" style="font-weight:bold;">Payment Amount</td><td class="rightAlign" style="font-weight:bold;"><input name="paymentAmount" type="text" id="paymentAmount" style="width:90px" /></td><td class="rightAlign">
+                            <input type="submit" value="Pay Online" class="CommandButton" name="btnPay" id="btnPay" />
+                        </td>
+			</tr>
+		</table>
+
+            </td>
+	</tr>
+	<tr>
+		<td colspan="2">
+                <table id="tblLiens" class="ruler" style="width:100%;border-collapse:collapse;border-spacing:0;">
+			<tr>
+				<td class="trspacer" colspan="7"></td>
+			</tr><tr>
+				<th>Claim Year 2025</th><th class="rightAlign">Face</th><th class="rightAlign">Penalty</th><th class="rightAlign">Interest</th><th class="rightAlign">Total</th><th class="rightAlign">Paid</th><th class="rightAlign">Balance</th>
+			</tr><tr>
+				<td>COUNTY</td><td class="rightAlign">$724.00</td><td class="rightAlign">$72.00</td><td class="rightAlign">$47.76</td><td class="rightAlign">$843.76</td><td class="rightAlign">$0.00</td><td class="rightAlign">$843.76</td>
+			</tr><tr>
+				<td>MCCC</td><td class="rightAlign">$54.00</td><td class="rightAlign">$5.00</td><td class="rightAlign">$3.52</td><td class="rightAlign">$62.52</td><td class="rightAlign">$0.00</td><td class="rightAlign">$62.52</td>
+			</tr><tr>
+				<td>MUNICIPAL</td><td class="rightAlign">$1,684.80</td><td class="rightAlign">$168.49</td><td class="rightAlign">$111.20</td><td class="rightAlign">$1,964.49</td><td class="rightAlign">$0.00</td><td class="rightAlign">$1,964.49</td>
+			</tr><tr>
+				<td>SCHOOL</td><td class="rightAlign">$3,307.62</td><td class="rightAlign">$330.76</td><td class="rightAlign">$218.32</td><td class="rightAlign">$3,856.70</td><td class="rightAlign">$0.00</td><td class="rightAlign">$3,856.70</td>
+			</tr><tr>
+				<td>COSTS</td><td class="rightAlign">$564.47</td><td class="rightAlign"></td><td class="rightAlign"></td><td class="rightAlign">$564.47</td><td class="rightAlign">$0.00</td><td class="rightAlign">$564.47</td>
+			</tr><tr>
+				<td class="rightAlign" colspan="4" style="font-weight:bold;">2025 Total</td><td class="rightAlign" style="font-weight:bold;">$7,291.94</td><td class="rightAlign" style="font-weight:bold;">$0.00</td><td class="rightAlign" style="font-weight:bold;">$7,291.94</td>
+			</tr><tr>
+				<td class="trspacer" colspan="7"></td>
+			</tr><tr>
+				<th>Claim Year 2024</th><th class="rightAlign">Face</th><th class="rightAlign">Penalty</th><th class="rightAlign">Interest</th><th class="rightAlign">Total</th><th class="rightAlign">Paid</th><th class="rightAlign">Balance</th>
+			</tr><tr>
+				<td>COUNTY</td><td class="rightAlign">$660.00</td><td class="rightAlign">$66.00</td><td class="rightAlign">$109.00</td><td class="rightAlign">$835.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$835.00</td>
+			</tr><tr>
+				<td>MCCC</td><td class="rightAlign">$54.00</td><td class="rightAlign">$5.00</td><td class="rightAlign">$8.80</td><td class="rightAlign">$67.80</td><td class="rightAlign">$0.00</td><td class="rightAlign">$67.80</td>
+			</tr><tr>
+				<td>MUNICIPAL</td><td class="rightAlign">$1,684.80</td><td class="rightAlign">$168.49</td><td class="rightAlign">$278.00</td><td class="rightAlign">$2,131.29</td><td class="rightAlign">$0.00</td><td class="rightAlign">$2,131.29</td>
+			</tr><tr>
+				<td>SCHOOL</td><td class="rightAlign">$3,129.91</td><td class="rightAlign">$312.99</td><td class="rightAlign">$516.40</td><td class="rightAlign">$3,959.30</td><td class="rightAlign">$0.00</td><td class="rightAlign">$3,959.30</td>
+			</tr><tr>
+				<td>COSTS</td><td class="rightAlign">$757.69</td><td class="rightAlign"></td><td class="rightAlign"></td><td class="rightAlign">$757.69</td><td class="rightAlign">$0.00</td><td class="rightAlign">$757.69</td>
+			</tr><tr>
+				<td class="rightAlign" colspan="4" style="font-weight:bold;">2024 Total</td><td class="rightAlign" style="font-weight:bold;">$7,751.08</td><td class="rightAlign" style="font-weight:bold;">$0.00</td><td class="rightAlign" style="font-weight:bold;">$7,751.08</td>
+			</tr><tr>
+				<td class="trspacer" colspan="7"></td>
+			</tr><tr>
+				<th>Claim Year 2023</th><th class="rightAlign">Face</th><th class="rightAlign">Penalty</th><th class="rightAlign">Interest</th><th class="rightAlign">Total</th><th class="rightAlign">Paid</th><th class="rightAlign">Balance</th>
+			</tr><tr>
+				<td>COUNTY</td><td class="rightAlign">$584.00</td><td class="rightAlign">$58.00</td><td class="rightAlign">$86.76</td><td class="rightAlign">$728.76</td><td class="rightAlign">$728.76</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MCCC</td><td class="rightAlign">$54.00</td><td class="rightAlign">$5.00</td><td class="rightAlign">$7.48</td><td class="rightAlign">$66.48</td><td class="rightAlign">$66.48</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MUNICIPAL</td><td class="rightAlign">$1,684.80</td><td class="rightAlign">$168.49</td><td class="rightAlign">$250.20</td><td class="rightAlign">$2,103.49</td><td class="rightAlign">$2,103.49</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>SCHOOL</td><td class="rightAlign">$3,030.72</td><td class="rightAlign">$303.07</td><td class="rightAlign">$450.00</td><td class="rightAlign">$3,783.79</td><td class="rightAlign">$3,783.79</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>COSTS</td><td class="rightAlign">$855.60</td><td class="rightAlign"></td><td class="rightAlign"></td><td class="rightAlign">$855.60</td><td class="rightAlign">$855.60</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td class="rightAlign" colspan="4" style="font-weight:bold;">2023 Total</td><td class="rightAlign" style="font-weight:bold;">$7,538.12</td><td class="rightAlign" style="font-weight:bold;">$7,538.12</td><td class="rightAlign" style="font-weight:bold;">$0.00</td>
+			</tr><tr>
+				<td class="trspacer" colspan="7"></td>
+			</tr><tr>
+				<th>Claim Year 2022</th><th class="rightAlign">Face</th><th class="rightAlign">Penalty</th><th class="rightAlign">Interest</th><th class="rightAlign">Total</th><th class="rightAlign">Paid</th><th class="rightAlign">Balance</th>
+			</tr><tr>
+				<td>COUNTY</td><td class="rightAlign">$540.00</td><td class="rightAlign">$54.00</td><td class="rightAlign">$75.82</td><td class="rightAlign">$669.82</td><td class="rightAlign">$669.82</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MCCC</td><td class="rightAlign">$54.00</td><td class="rightAlign">$5.00</td><td class="rightAlign">$7.48</td><td class="rightAlign">$66.48</td><td class="rightAlign">$66.48</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MUNICIPAL</td><td class="rightAlign">$1,684.80</td><td class="rightAlign">$168.49</td><td class="rightAlign">$236.30</td><td class="rightAlign">$2,089.59</td><td class="rightAlign">$2,089.59</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>SCHOOL</td><td class="rightAlign">$2,956.33</td><td class="rightAlign">$295.63</td><td class="rightAlign">$414.63</td><td class="rightAlign">$3,666.59</td><td class="rightAlign">$3,666.59</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>COSTS</td><td class="rightAlign">$493.23</td><td class="rightAlign"></td><td class="rightAlign"></td><td class="rightAlign">$493.23</td><td class="rightAlign">$493.23</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td class="rightAlign" colspan="4" style="font-weight:bold;">2022 Total</td><td class="rightAlign" style="font-weight:bold;">$6,985.71</td><td class="rightAlign" style="font-weight:bold;">$6,985.71</td><td class="rightAlign" style="font-weight:bold;">$0.00</td>
+			</tr><tr>
+				<td class="trspacer" colspan="7"></td>
+			</tr><tr>
+				<th>Claim Year 2021</th><th class="rightAlign">Face</th><th class="rightAlign">Penalty</th><th class="rightAlign">Interest</th><th class="rightAlign">Total</th><th class="rightAlign">Paid</th><th class="rightAlign">Balance</th>
+			</tr><tr>
+				<td>COUNTY</td><td class="rightAlign">$500.00</td><td class="rightAlign">$50.00</td><td class="rightAlign">$74.34</td><td class="rightAlign">$624.34</td><td class="rightAlign">$624.34</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MCCC</td><td class="rightAlign">$54.00</td><td class="rightAlign">$5.00</td><td class="rightAlign">$7.92</td><td class="rightAlign">$66.92</td><td class="rightAlign">$66.92</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MUNICIPAL</td><td class="rightAlign">$1,684.82</td><td class="rightAlign">$168.48</td><td class="rightAlign">$250.20</td><td class="rightAlign">$2,103.50</td><td class="rightAlign">$2,103.50</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>SCHOOL</td><td class="rightAlign">$2,859.89</td><td class="rightAlign">$286.00</td><td class="rightAlign">$424.62</td><td class="rightAlign">$3,570.51</td><td class="rightAlign">$3,570.51</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>COSTS</td><td class="rightAlign">$544.18</td><td class="rightAlign"></td><td class="rightAlign"></td><td class="rightAlign">$544.18</td><td class="rightAlign">$544.18</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td class="rightAlign" colspan="4" style="font-weight:bold;">2021 Total</td><td class="rightAlign" style="font-weight:bold;">$6,909.45</td><td class="rightAlign" style="font-weight:bold;">$6,909.45</td><td class="rightAlign" style="font-weight:bold;">$0.00</td>
+			</tr><tr>
+				<td class="trspacer" colspan="7"></td>
+			</tr><tr>
+				<th>Claim Year 2020</th><th class="rightAlign">Face</th><th class="rightAlign">Penalty</th><th class="rightAlign">Interest</th><th class="rightAlign">Total</th><th class="rightAlign">Paid</th><th class="rightAlign">Balance</th>
+			</tr><tr>
+				<td>COUNTY</td><td class="rightAlign">$477.00</td><td class="rightAlign">$48.00</td><td class="rightAlign">$71.52</td><td class="rightAlign">$596.52</td><td class="rightAlign">$596.52</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MCCC</td><td class="rightAlign">$54.00</td><td class="rightAlign">$5.00</td><td class="rightAlign">$7.92</td><td class="rightAlign">$66.92</td><td class="rightAlign">$66.92</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MUNICIPAL</td><td class="rightAlign">$1,684.80</td><td class="rightAlign">$168.48</td><td class="rightAlign">$252.24</td><td class="rightAlign">$2,105.52</td><td class="rightAlign">$2,105.52</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>SCHOOL</td><td class="rightAlign">$2,859.90</td><td class="rightAlign">$285.99</td><td class="rightAlign">$427.98</td><td class="rightAlign">$3,573.87</td><td class="rightAlign">$3,573.87</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>COSTS</td><td class="rightAlign">$1,112.66</td><td class="rightAlign"></td><td class="rightAlign"></td><td class="rightAlign">$1,112.66</td><td class="rightAlign">$1,112.66</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td class="rightAlign" colspan="4" style="font-weight:bold;">2020 Total</td><td class="rightAlign" style="font-weight:bold;">$7,455.49</td><td class="rightAlign" style="font-weight:bold;">$7,455.49</td><td class="rightAlign" style="font-weight:bold;">$0.00</td>
+			</tr><tr>
+				<td class="trspacer" colspan="7"></td>
+			</tr><tr>
+				<th>Claim Year 2019</th><th class="rightAlign">Face</th><th class="rightAlign">Penalty</th><th class="rightAlign">Interest</th><th class="rightAlign">Total</th><th class="rightAlign">Paid</th><th class="rightAlign">Balance</th>
+			</tr><tr>
+				<td>COUNTY</td><td class="rightAlign">$477.00</td><td class="rightAlign">$48.00</td><td class="rightAlign">$71.40</td><td class="rightAlign">$596.40</td><td class="rightAlign">$596.40</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MCCC</td><td class="rightAlign">$54.00</td><td class="rightAlign">$5.00</td><td class="rightAlign">$7.92</td><td class="rightAlign">$66.92</td><td class="rightAlign">$66.92</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MUNICIPAL</td><td class="rightAlign">$1,684.80</td><td class="rightAlign">$168.49</td><td class="rightAlign">$251.88</td><td class="rightAlign">$2,105.17</td><td class="rightAlign">$2,105.17</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>SCHOOL</td><td class="rightAlign">$2,802.03</td><td class="rightAlign">$280.20</td><td class="rightAlign">$419.04</td><td class="rightAlign">$3,501.27</td><td class="rightAlign">$3,501.27</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>COSTS</td><td class="rightAlign">$708.83</td><td class="rightAlign"></td><td class="rightAlign"></td><td class="rightAlign">$708.83</td><td class="rightAlign">$708.83</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td class="rightAlign" colspan="4" style="font-weight:bold;">2019 Total</td><td class="rightAlign" style="font-weight:bold;">$6,978.59</td><td class="rightAlign" style="font-weight:bold;">$6,978.59</td><td class="rightAlign" style="font-weight:bold;">$0.00</td>
+			</tr><tr>
+				<td class="trspacer" colspan="7"></td>
+			</tr><tr>
+				<th>Claim Year 2018</th><th class="rightAlign">Face</th><th class="rightAlign">Penalty</th><th class="rightAlign">Interest</th><th class="rightAlign">Total</th><th class="rightAlign">Paid</th><th class="rightAlign">Balance</th>
+			</tr><tr>
+				<td>COUNTY</td><td class="rightAlign">$477.00</td><td class="rightAlign">$48.00</td><td class="rightAlign">$66.98</td><td class="rightAlign">$591.98</td><td class="rightAlign">$591.98</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MCCC</td><td class="rightAlign">$54.00</td><td class="rightAlign">$5.00</td><td class="rightAlign">$7.48</td><td class="rightAlign">$66.48</td><td class="rightAlign">$66.48</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MUNICIPAL</td><td class="rightAlign">$1,684.80</td><td class="rightAlign">$168.49</td><td class="rightAlign">$236.30</td><td class="rightAlign">$2,089.59</td><td class="rightAlign">$2,089.59</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>SCHOOL</td><td class="rightAlign">$2,740.04</td><td class="rightAlign">$274.00</td><td class="rightAlign">$384.37</td><td class="rightAlign">$3,398.41</td><td class="rightAlign">$3,398.41</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>COSTS</td><td class="rightAlign">$444.30</td><td class="rightAlign"></td><td class="rightAlign"></td><td class="rightAlign">$444.30</td><td class="rightAlign">$444.30</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td class="rightAlign" colspan="4" style="font-weight:bold;">2018 Total</td><td class="rightAlign" style="font-weight:bold;">$6,590.76</td><td class="rightAlign" style="font-weight:bold;">$6,590.76</td><td class="rightAlign" style="font-weight:bold;">$0.00</td>
+			</tr><tr>
+				<td class="trspacer" colspan="7"></td>
+			</tr><tr>
+				<th>Claim Year 2017</th><th class="rightAlign">Face</th><th class="rightAlign">Penalty</th><th class="rightAlign">Interest</th><th class="rightAlign">Total</th><th class="rightAlign">Paid</th><th class="rightAlign">Balance</th>
+			</tr><tr>
+				<td>COUNTY</td><td class="rightAlign">$477.00</td><td class="rightAlign">$48.00</td><td class="rightAlign">$66.98</td><td class="rightAlign">$591.98</td><td class="rightAlign">$591.98</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MCCC</td><td class="rightAlign">$54.00</td><td class="rightAlign">$5.00</td><td class="rightAlign">$7.48</td><td class="rightAlign">$66.48</td><td class="rightAlign">$66.48</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MUNICIPAL</td><td class="rightAlign">$1,684.80</td><td class="rightAlign">$168.49</td><td class="rightAlign">$236.30</td><td class="rightAlign">$2,089.59</td><td class="rightAlign">$2,089.59</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>SCHOOL</td><td class="rightAlign">$2,676.68</td><td class="rightAlign">$267.66</td><td class="rightAlign">$375.36</td><td class="rightAlign">$3,319.70</td><td class="rightAlign">$3,319.70</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>COSTS</td><td class="rightAlign">$515.52</td><td class="rightAlign"></td><td class="rightAlign"></td><td class="rightAlign">$515.52</td><td class="rightAlign">$515.52</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td class="rightAlign" colspan="4" style="font-weight:bold;">2017 Total</td><td class="rightAlign" style="font-weight:bold;">$6,583.27</td><td class="rightAlign" style="font-weight:bold;">$6,583.27</td><td class="rightAlign" style="font-weight:bold;">$0.00</td>
+			</tr><tr>
+				<td class="trspacer" colspan="7"></td>
+			</tr><tr>
+				<th>Claim Year 2016</th><th class="rightAlign">Face</th><th class="rightAlign">Penalty</th><th class="rightAlign">Interest</th><th class="rightAlign">Total</th><th class="rightAlign">Paid</th><th class="rightAlign">Balance</th>
+			</tr><tr>
+				<td>COUNTY</td><td class="rightAlign">$477.00</td><td class="rightAlign">$48.00</td><td class="rightAlign">$66.98</td><td class="rightAlign">$591.98</td><td class="rightAlign">$591.98</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MCCC</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MUNICIPAL</td><td class="rightAlign">$1,684.80</td><td class="rightAlign">$168.49</td><td class="rightAlign">$236.30</td><td class="rightAlign">$2,089.59</td><td class="rightAlign">$2,089.59</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>SCHOOL</td><td class="rightAlign">$2,611.93</td><td class="rightAlign">$261.19</td><td class="rightAlign">$366.35</td><td class="rightAlign">$3,239.47</td><td class="rightAlign">$3,239.47</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>COSTS</td><td class="rightAlign">$511.16</td><td class="rightAlign"></td><td class="rightAlign"></td><td class="rightAlign">$511.16</td><td class="rightAlign">$511.16</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td class="rightAlign" colspan="4" style="font-weight:bold;">2016 Total</td><td class="rightAlign" style="font-weight:bold;">$6,432.20</td><td class="rightAlign" style="font-weight:bold;">$6,432.20</td><td class="rightAlign" style="font-weight:bold;">$0.00</td>
+			</tr><tr>
+				<td class="trspacer" colspan="7"></td>
+			</tr><tr>
+				<th>Claim Year 2015</th><th class="rightAlign">Face</th><th class="rightAlign">Penalty</th><th class="rightAlign">Interest</th><th class="rightAlign">Total</th><th class="rightAlign">Paid</th><th class="rightAlign">Balance</th>
+			</tr><tr>
+				<td>COUNTY</td><td class="rightAlign">$434.00</td><td class="rightAlign">$43.40</td><td class="rightAlign">$60.86</td><td class="rightAlign">$538.26</td><td class="rightAlign">$538.26</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MCCC</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MUNICIPAL</td><td class="rightAlign">$1,684.81</td><td class="rightAlign">$168.48</td><td class="rightAlign">$236.30</td><td class="rightAlign">$2,089.59</td><td class="rightAlign">$2,089.59</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>SCHOOL</td><td class="rightAlign">$2,611.93</td><td class="rightAlign">$261.19</td><td class="rightAlign">$366.35</td><td class="rightAlign">$3,239.47</td><td class="rightAlign">$3,239.47</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>COSTS</td><td class="rightAlign">$424.46</td><td class="rightAlign"></td><td class="rightAlign"></td><td class="rightAlign">$424.46</td><td class="rightAlign">$424.46</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td class="rightAlign" colspan="4" style="font-weight:bold;">2015 Total</td><td class="rightAlign" style="font-weight:bold;">$6,291.78</td><td class="rightAlign" style="font-weight:bold;">$6,291.78</td><td class="rightAlign" style="font-weight:bold;">$0.00</td>
+			</tr><tr>
+				<td class="trspacer" colspan="7"></td>
+			</tr><tr>
+				<th>Claim Year 2014</th><th class="rightAlign">Face</th><th class="rightAlign">Penalty</th><th class="rightAlign">Interest</th><th class="rightAlign">Total</th><th class="rightAlign">Paid</th><th class="rightAlign">Balance</th>
+			</tr><tr>
+				<td>COUNTY</td><td class="rightAlign">$434.00</td><td class="rightAlign">$43.00</td><td class="rightAlign">$60.83</td><td class="rightAlign">$537.83</td><td class="rightAlign">$537.83</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MCCC</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MUNICIPAL</td><td class="rightAlign">$1,684.80</td><td class="rightAlign">$168.48</td><td class="rightAlign">$236.29</td><td class="rightAlign">$2,089.57</td><td class="rightAlign">$2,089.57</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>SCHOOL</td><td class="rightAlign">$2,529.27</td><td class="rightAlign">$252.93</td><td class="rightAlign">$354.74</td><td class="rightAlign">$3,136.94</td><td class="rightAlign">$3,136.94</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>COSTS</td><td class="rightAlign">$486.24</td><td class="rightAlign"></td><td class="rightAlign"></td><td class="rightAlign">$486.24</td><td class="rightAlign">$486.24</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td class="rightAlign" colspan="4" style="font-weight:bold;">2014 Total</td><td class="rightAlign" style="font-weight:bold;">$6,250.58</td><td class="rightAlign" style="font-weight:bold;">$6,250.58</td><td class="rightAlign" style="font-weight:bold;">$0.00</td>
+			</tr><tr>
+				<td class="trspacer" colspan="7"></td>
+			</tr><tr>
+				<th>Claim Year 2013</th><th class="rightAlign">Face</th><th class="rightAlign">Penalty</th><th class="rightAlign">Interest</th><th class="rightAlign">Total</th><th class="rightAlign">Paid</th><th class="rightAlign">Balance</th>
+			</tr><tr>
+				<td>COUNTY</td><td class="rightAlign">$434.00</td><td class="rightAlign">$43.00</td><td class="rightAlign">$60.82</td><td class="rightAlign">$537.82</td><td class="rightAlign">$537.82</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MCCC</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MUNICIPAL</td><td class="rightAlign">$1,684.80</td><td class="rightAlign">$168.48</td><td class="rightAlign">$236.29</td><td class="rightAlign">$2,089.57</td><td class="rightAlign">$2,089.57</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>SCHOOL</td><td class="rightAlign">$2,478.30</td><td class="rightAlign">$247.83</td><td class="rightAlign">$347.58</td><td class="rightAlign">$3,073.71</td><td class="rightAlign">$3,073.71</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>COSTS</td><td class="rightAlign">$477.88</td><td class="rightAlign"></td><td class="rightAlign"></td><td class="rightAlign">$477.88</td><td class="rightAlign">$477.88</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td class="rightAlign" colspan="4" style="font-weight:bold;">2013 Total</td><td class="rightAlign" style="font-weight:bold;">$6,178.98</td><td class="rightAlign" style="font-weight:bold;">$6,178.98</td><td class="rightAlign" style="font-weight:bold;">$0.00</td>
+			</tr><tr>
+				<td class="trspacer" colspan="7"></td>
+			</tr><tr>
+				<th>Claim Year 2012</th><th class="rightAlign">Face</th><th class="rightAlign">Penalty</th><th class="rightAlign">Interest</th><th class="rightAlign">Total</th><th class="rightAlign">Paid</th><th class="rightAlign">Balance</th>
+			</tr><tr>
+				<td>COUNTY</td><td class="rightAlign">$434.00</td><td class="rightAlign">$43.00</td><td class="rightAlign">$60.82</td><td class="rightAlign">$537.82</td><td class="rightAlign">$537.82</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MCCC</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MUNICIPAL</td><td class="rightAlign">$1,684.80</td><td class="rightAlign">$168.49</td><td class="rightAlign">$236.29</td><td class="rightAlign">$2,089.58</td><td class="rightAlign">$2,089.58</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>SCHOOL</td><td class="rightAlign">$2,409.42</td><td class="rightAlign">$240.94</td><td class="rightAlign">$337.92</td><td class="rightAlign">$2,988.28</td><td class="rightAlign">$2,988.28</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>COSTS</td><td class="rightAlign">$428.33</td><td class="rightAlign"></td><td class="rightAlign"></td><td class="rightAlign">$428.33</td><td class="rightAlign">$428.33</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td class="rightAlign" colspan="4" style="font-weight:bold;">2012 Total</td><td class="rightAlign" style="font-weight:bold;">$6,044.01</td><td class="rightAlign" style="font-weight:bold;">$6,044.01</td><td class="rightAlign" style="font-weight:bold;">$0.00</td>
+			</tr><tr>
+				<td class="trspacer" colspan="7"></td>
+			</tr><tr>
+				<th>Claim Year 2011</th><th class="rightAlign">Face</th><th class="rightAlign">Penalty</th><th class="rightAlign">Interest</th><th class="rightAlign">Total</th><th class="rightAlign">Paid</th><th class="rightAlign">Balance</th>
+			</tr><tr>
+				<td>COUNTY</td><td class="rightAlign">$371.00</td><td class="rightAlign">$37.00</td><td class="rightAlign">$52.02</td><td class="rightAlign">$460.02</td><td class="rightAlign">$460.02</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MCCC</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MUNICIPAL</td><td class="rightAlign">$1,684.80</td><td class="rightAlign">$168.49</td><td class="rightAlign">$236.30</td><td class="rightAlign">$2,089.59</td><td class="rightAlign">$2,089.59</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>SCHOOL</td><td class="rightAlign">$2,368.09</td><td class="rightAlign">$236.81</td><td class="rightAlign">$332.12</td><td class="rightAlign">$2,937.02</td><td class="rightAlign">$2,937.02</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>COSTS</td><td class="rightAlign">$85.00</td><td class="rightAlign"></td><td class="rightAlign"></td><td class="rightAlign">$85.00</td><td class="rightAlign">$85.00</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td class="rightAlign" colspan="4" style="font-weight:bold;">2011 Total</td><td class="rightAlign" style="font-weight:bold;">$5,571.63</td><td class="rightAlign" style="font-weight:bold;">$5,571.63</td><td class="rightAlign" style="font-weight:bold;">$0.00</td>
+			</tr><tr>
+				<td class="trspacer" colspan="7"></td>
+			</tr><tr>
+				<th>Claim Year 2010</th><th class="rightAlign">Face</th><th class="rightAlign">Penalty</th><th class="rightAlign">Interest</th><th class="rightAlign">Total</th><th class="rightAlign">Paid</th><th class="rightAlign">Balance</th>
+			</tr><tr>
+				<td>COUNTY</td><td class="rightAlign">$408.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$52.02</td><td class="rightAlign">$460.02</td><td class="rightAlign">$460.02</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MCCC</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>MUNICIPAL</td><td class="rightAlign">$1,853.28</td><td class="rightAlign">$0.00</td><td class="rightAlign">$236.29</td><td class="rightAlign">$2,089.57</td><td class="rightAlign">$2,089.57</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>SCHOOL</td><td class="rightAlign">$2,413.97</td><td class="rightAlign">$0.00</td><td class="rightAlign">$307.78</td><td class="rightAlign">$2,721.75</td><td class="rightAlign">$2,721.75</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td>COSTS</td><td class="rightAlign">$83.45</td><td class="rightAlign"></td><td class="rightAlign"></td><td class="rightAlign">$83.45</td><td class="rightAlign">$83.45</td><td class="rightAlign">$0.00</td>
+			</tr><tr>
+				<td class="rightAlign" colspan="4" style="font-weight:bold;">2010 Total</td><td class="rightAlign" style="font-weight:bold;">$5,354.79</td><td class="rightAlign" style="font-weight:bold;">$5,354.79</td><td class="rightAlign" style="font-weight:bold;">$0.00</td>
+			</tr>
+		</table>
+            </td>
+	</tr>
+	<tr>
+		<td style="word-wrap:break-word; text-align:left;" colspan="2">
+                <p align="center">
+                    <span style="color:#ff6a00;">PLEASE NOTE THAT THIS IS NOT A CERTIFIED SEARCH.<br />YOU MAY ORDER A CERTIFIED SEARCH BY MAIL OR BY VISITING THE TAX CLAIM OFFICE.<br />
+                        PLEASE SEE OUR <a href="http://www.montcopa.org/2337/Certified-Tax-Search">CERTIFIED TAX SEARCH</a> FOR INSTRUCTION.
+                    </span>
+                </p>
+            </td>
+	</tr>
+</table>
+
+</form>
+
+    </div>
+    <div class="html5footer footer_ts">
+        <div class="footer_ts2">
+            <a href="http://www.montcopa.org" class="navbartext3">Home</a>
+            <a href="http://www.montcopa.org/directory.aspx" class="navbartext3">Contact Directory</a>
+            <a href="http://www.montcopa.org/sitemap.aspx" class="navbartext3">Site Map</a>
+            <a href="http://www.montcopa.org/index.aspx?NID=720" class="navbartext3">Privacy Statement</a>
+            <a href="http://www.montcopa.org/index.aspx?NID=721" class="navbartext3">Disclaimer</a>
+            <a href="http://www.montcopa.org/accessibility.aspx" class="navbartext3">Accessibility</a>
+            <a href="http://www.montcopa.org/copyright.aspx" class="navbartext3">Copyright Notices</a>
+            <br/>&nbsp;&nbsp;&nbsp;P.O. Box 311, Norristown, PA 19404-0311  &nbsp;&nbsp;&nbsp;   Ph: 610-278-3000   &nbsp;&nbsp;&nbsp;  Courthouse Hours  8:30 a.m.- 4:15 p.m.  &nbsp;&nbsp;&nbsp;
+            <a href="http://www.montcopa.org/index.aspx?NID=722" class="navbartext3">Driving Directions</a>
+            <a href="http://www.montcopa.org/MyAccount?from=url&amp;url=/index.aspx" class="navbartext3">Login</a>
+        </div>
+    </div>
+</body>
+</html>
+

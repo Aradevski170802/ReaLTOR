@@ -1,0 +1,83 @@
+{
+ "objectIdFieldName": "OBJECTID",
+ "globalIdFieldName": "",
+ "geometryType": "esriGeometryPolygon",
+ "spatialReference": {
+  "wkid": 102729,
+  "latestWkid": 2272
+ },
+ "fields": [
+  {
+   "name": "PARID",
+   "alias": "PARCEL ID",
+   "type": "esriFieldTypeDouble"
+  },
+  {
+   "name": "PIN",
+   "alias": "PIN",
+   "type": "esriFieldTypeString",
+   "length": 14
+  },
+  {
+   "name": "MAPID",
+   "alias": "MAPID",
+   "type": "esriFieldTypeString",
+   "length": 254
+  },
+  {
+   "name": "MUNICIPALI",
+   "alias": "MUNICIPALI",
+   "type": "esriFieldTypeInteger"
+  },
+  {
+   "name": "CALCULATED",
+   "alias": "CALCULATED",
+   "type": "esriFieldTypeDouble"
+  },
+  {
+   "name": "TAXYR",
+   "alias": "TAXYR",
+   "type": "esriFieldTypeInteger"
+  },
+  {
+   "name": "ADRCAT",
+   "alias": "SITE ADDRESS",
+   "type": "esriFieldTypeString",
+   "length": 254
+  },
+  {
+   "name": "CLICKTHROU",
+   "alias": "CLICK FOR MORE INFORMATION",
+   "type": "esriFieldTypeString",
+   "length": 254
+  },
+  {
+   "name": "LEGAL2",
+   "alias": "DESCRIPTION",
+   "type": "esriFieldTypeString",
+   "length": 254
+  },
+  {
+   "name": "LEGAL3",
+   "alias": "SIZE",
+   "type": "esriFieldTypeString",
+   "length": 254
+  }
+ ],
+ "features": [
+  {
+   "attributes": {
+    "PARID": 1000043400.0,
+    "PIN": "01-05-380:000",
+    "MAPID": "01-05-380:000",
+    "MUNICIPALI": 1,
+    "CALCULATED": 0.13,
+    "TAXYR": 2026,
+    "ADRCAT": "60 S GLENWOOD AVE",
+    "CLICKTHROU": "http://delcorealestate.co.delaware.pa.us/pt/datalets/datalet.aspx?mode=&usesearch=no&jur=023&taxyr=2026&pin=01000043400",
+    "LEGAL2": "2 STY HSE GAR",
+    "LEGAL3": "40 X 140"
+   }
+  }
+ ]
+}

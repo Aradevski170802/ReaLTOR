@@ -1,0 +1,122 @@
+<!-- Fixture: Montgomery County Tax Claim Bureau page captured 2026-09-13; owner name anonymized. -->
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>
+
+</title><link href="Styles/web.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery-1.12.0.min.js" ></script>
+    
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/t/dt/dt-1.10.11/datatables.min.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/t/dt/dt-1.10.11/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tblResults').DataTable({
+                "bFilter": false
+            });
+        });
+
+        function showDetails(guid) {
+            $("#entity").val(guid);
+            $("#form1").submit();
+        }
+    </script>
+</head>
+<body class="PageBody">
+    <div id="headerContent">
+        <div id="pnlHeader" style="background-color:#424242;height:125px;">
+	
+            <table style="width:985px; table-layout:fixed;" cellpadding="5">
+                <tr>
+                    <td style="width:300px"></td>
+                    <td style="width:200px"><img src="Images/seal.png" /></td>
+                    <td style="width:485px"><img src="Images/county.png" /></td>
+                </tr>
+            </table>
+        
+</div>
+    </div>
+    <div id="mainContent" >
+        
+       <table style="width:985px; table-layout:fixed;" cellpadding="10">
+            <tr>
+                <td style="text-align:left;" >
+                    <div id="BreadCrumbs" style="float: left; padding: 0 75px 0 0; margin:0px 0px 10px 0px;">
+                        <span class="BreadLeader">You are here:</span>
+                        <span class="BreadLink">
+                            <a class="CrumbLink" href="http://www.montcopa.org/index.aspx">Home</a> &gt;
+                            <a class="CrumbLink" href="http://www.montcopa.org/index.aspx?NID=8">Departments</a> &gt; 
+                            <a class="CrumbLink" href="http://www.montcopa.org/index.aspx?NID=855">County Administration</a> &gt;
+                            <a class="CrumbLink" href="http://www.montcopa.org/index.aspx?NID=283">Tax Claim Bureau</a> &gt;
+                            <a class="CrumbLink" href="./Search.aspx">Parcel Search</a> &gt;
+                        </span>
+                        <span class="BreadPage">Parcel Search Results</span>
+                    </div>
+                    <br style="clear: left;" />
+                </td>
+            </tr>
+
+            <tr>
+                <td style="word-wrap:break-word; text-align:left;">
+                    <div style=" border-bottom: 2px solid #CCCCA5; padding-bottom: 3px; margin-bottom: 12px;" class="Headline">Parcel Search Results</div>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;">
+                    
+                    <form id="form1" action="./ParcelInfo.aspx" method="post" >
+                            <table id="tblResults" style="width:955px;">
+	<thead>
+		<tr>
+			<th align="left" style="width:15%;">Parcel Number</th><th align="left">Owner Name</th><th align="left">Address</th><th align="left">Location</th>
+		</tr>
+	</thead><tbody>
+		<tr>
+			<td><a href="javascript:showDetails(&#39;9b84d400-a0eb-e511-8127-c4346bb588c8&#39;)">02-00-02904-00-1</a></td><td>SAMPLE OWNER A </td><td>134 W FRONT ST <br/>BRIDGEPORT PA 19405</td><td>134 W FRONT ST<br/>19405</td>
+		</tr>
+	</tbody>
+</table>
+                    <input name="entities" type="hidden" id="entities" value="9b84d400-a0eb-e511-8127-c4346bb588c8" />
+                    <input type="hidden" id="entity" name="entity"/>
+                    </form>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="word-wrap:break-word; text-align:right; ">
+                    <form id="form2" method="get" action="./Search.aspx">
+                    <input type="submit" name="search" value="Back to Search" style="width:130px;" class="CommandButton"/>
+                    </form>
+                </td>
+            </tr>           
+            <tr>
+                <td style="word-wrap:break-word; text-align:left;" >
+                    <p align="center">
+                        <span style="color:#ff6a00;">PLEASE NOTE THAT THIS IS NOT A CERTIFIED SEARCH.<br />YOU MAY ORDER A CERTIFIED
+SEARCH BY MAIL OR BY VISITING THE TAX CLAIM OFFICE.<br />
+                        PLEASE SEE OUR <a href="http://www.montcopa.org/2337/Certified-Tax-Search">CERTIFIED TAX SEARCH</a> FOR INSTRUCTION.</span>
+                    </p>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+    <div class="html5footer footer_ts">
+        <div class="footer_ts2">
+            <a href="http://www.montcopa.org" class="navbartext3">Home</a>
+            <a href="http://www.montcopa.org/directory.aspx" class="navbartext3">Contact Directory</a>
+            <a href="http://www.montcopa.org/sitemap.aspx" class="navbartext3">Site Map</a>
+            <a href="http://www.montcopa.org/index.aspx?NID=720" class="navbartext3">Privacy Statement</a>
+            <a href="http://www.montcopa.org/index.aspx?NID=721" class="navbartext3">Disclaimer</a>
+            <a href="http://www.montcopa.org/accessibility.aspx" class="navbartext3">Accessibility</a>
+            <a href="http://www.montcopa.org/copyright.aspx" class="navbartext3">Copyright Notices</a>
+            <br/>&nbsp;&nbsp;&nbsp;P.O. Box 311, Norristown, PA 19404-0311  &nbsp;&nbsp;&nbsp;   Ph: 610-278-3000   &nbsp;&nbsp;&nbsp;  Courthouse Hours  8:30 a.m.- 4:15 p.m.  &nbsp;&nbsp;&nbsp;
+            <a href="http://www.montcopa.org/index.aspx?NID=722" class="navbartext3">Driving Directions</a>
+            <a href="http://www.montcopa.org/MyAccount?from=url&amp;url=/index.aspx" class="navbartext3">Login</a>
+        </div>
+    </div>
+</body>
+</html>
+

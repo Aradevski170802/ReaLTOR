@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# App runtime data (databases, uploads, evidence snapshots, exports, master key)
+backend/data/
+backend/data-preview/
+backend/data-e2e/
+frontend/data-e2e/
+!backend/data/.gitkeep
+
+# Node
+frontend/node_modules/
+frontend/dist/
+frontend/test-results/
+frontend/playwright-report/
+
+# Environment / secrets
+.env
+*.key
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

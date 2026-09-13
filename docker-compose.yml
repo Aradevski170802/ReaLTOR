@@ -1,0 +1,57 @@
+# Production-like stack: PostgreSQL + API + background worker (daily refresh scheduler) + web UI.
+#   cp .env.example .env   # set USI_MASTER_KEY (required) and USI_AUTH_MODE=token for multi-user use
+#   docker compose up --build
+#   docker compose exec api python -m app.cli create-user --email you@example.com --role admin
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: usi
+      POSTGRES_PASSWORD: ${USI_DB_PASSWORD:-usi-local-only}
+      POSTGRES_DB: usi
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U usi"]
+      interval: 5s
+      retries: 20
+
+  api:
+    build: ./backend
+    env_file: .env
+    environment:
+      USI_DATABASE_URL: postgresql+psycopg://usi:${USI_DB_PASSWORD:-usi-local-only}@db:5432/usi
+      USI_DATA_DIR: /data
+      USI_AUTO_MIGRATE: "true"
+      USI_CORS_ORIGINS: '["http://localhost:8080"]'
+      USI_PUBLIC_BASE_URL: http://localhost:8080
+    volumes:
+      - usidata:/data
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+
+  worker:
+    build: ./backend
+    command: ["python", "-m", "app.jobs.worker"]
+    env_file: .env
+    environment:
+      USI_DATABASE_URL: postgresql+psycopg://usi:${USI_DB_PASSWORD:-usi-local-only}@db:5432/usi
+      USI_DATA_DIR: /data
+    volumes:
+      - usidata:/data
+    depends_on:
+      - api
+
+  web:
+    build: ./frontend
+    depends_on:
+      - api
+    ports:
+      - "8080:80"
+
+volumes:
+  pgdata:
+  usidata:

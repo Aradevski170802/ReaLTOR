@@ -1,0 +1,15 @@
+.git
+.github
+.env
+**/node_modules
+**/.venv
+**/__pycache__
+**/.pytest_cache
+**/.ruff_cache
+backend/data
+backend/data-preview
+backend/data-e2e
+frontend/dist
+frontend/data-e2e
+frontend/test-results
+frontend/playwright-report

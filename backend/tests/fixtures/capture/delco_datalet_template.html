@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<!--
+  SYNTHETIC FIXTURE. Modelled on the Tyler iasWorld public-access "datalet" markup used by the Delaware County
+  Real Estate & Tax Records portal (DataletHeader / DataletSideHeading / DataletData / DataletTopHeading).
+  Values are filled from placeholders by the tests and the demo seed; they are not captured county data.
+-->
+<html lang="en-US">
+<head><title>Delaware Pennsylvania</title></head>
+<body>
+<table id="tblHeader"><tr><td>Parcel ID: {pin}</td></tr></table>
+
+<table cellspacing="0" class="DataletHeader"><tr><td class="DataletHeader">Site Information</td></tr></table>
+<table id="Site Information" cellspacing="0" class="DataletTable">
+  <tr><td class="DataletSideHeading">Site Location:</td><td class="DataletData">{site_location}</td></tr>
+  <tr><td class="DataletSideHeading">Legal Description:</td><td class="DataletData">{legal}</td></tr>
+  <tr><td class="DataletSideHeading">School District:</td><td class="DataletData">{school}</td></tr>
+  <tr><td class="DataletSideHeading">Property Type:</td><td class="DataletData">{ptype}</td></tr>
+  <tr><td class="DataletSideHeading">Assessment Value:</td><td class="DataletData">{assessment}</td></tr>
+</table>
+
+<table cellspacing="0" class="DataletHeader"><tr><td class="DataletHeader">{detail_section}</td></tr></table>
+<table id="{detail_section}" cellspacing="0" class="DataletTable">
+{detail_rows}
+</table>
+
+<table cellspacing="0" class="DataletHeader"><tr><td class="DataletHeader">Owner History</td></tr></table>
+<table id="Owner History" cellspacing="0" class="DataletTable">
+  <tr><td class="DataletTopHeading">Owner</td><td class="DataletTopHeading">Sale Date</td><td class="DataletTopHeading">Sale Price</td><td class="DataletTopHeading">Book/Page</td></tr>
+  <tr><td class="DataletData">SAMPLE OWNER (CURRENT)</td><td class="DataletData">{sale_date}</td><td class="DataletData">{sale_price}</td><td class="DataletData">05912/0123</td></tr>
+  <tr><td class="DataletData">SAMPLE OWNER (PRIOR)</td><td class="DataletData">04-11-1999</td><td class="DataletData">$98,000</td><td class="DataletData">01877/0456</td></tr>
+</table>
+
+<table cellspacing="0" class="DataletHeader"><tr><td class="DataletHeader">Tax Sale Information</td></tr></table>
+<table id="Tax Sale Information" cellspacing="0" class="DataletTable">
+  <tr><td class="DataletSideHeading">Status:</td><td class="DataletData">{status}</td></tr>
+  <tr><td class="DataletSideHeading">Sale Date:</td><td class="DataletData">09/24/2026</td></tr>
+</table>
+
+<table cellspacing="0" class="DataletHeader"><tr><td class="DataletHeader">Outstanding Delinquent Taxes</td></tr></table>
+<table id="Outstanding Delinquent Taxes" cellspacing="0" class="DataletTable">
+  <tr><td class="DataletTopHeading">Year</td><td class="DataletTopHeading">Face Amount</td><td class="DataletTopHeading">Taxes Due</td></tr>
+  <tr><td class="DataletData">2024</td><td class="DataletData">{face_2024}</td><td class="DataletData">{due_2024}</td></tr>
+  <tr><td class="DataletData">2025</td><td class="DataletData">{face_2025}</td><td class="DataletData">{due_2025}</td></tr>
+</table>
+
+<table cellspacing="0" class="DataletHeader"><tr><td class="DataletHeader">Delinquent Tax - All Years Combined</td></tr></table>
+<table id="All Years" cellspacing="0" class="DataletTable">
+  <tr><td class="DataletSideHeading">Total Due:</td><td class="DataletData">{total_due}</td></tr>
+</table>
+
+<table cellspacing="0" class="DataletHeader"><tr><td class="DataletHeader">County Tax Receivable</td></tr></table>
+<table id="County Tax Receivable" cellspacing="0" class="DataletTable">
+  <tr><td class="DataletTopHeading">Year</td><td class="DataletTopHeading">Face Amount Due</td><td class="DataletTopHeading">Balance</td></tr>
+  <tr><td class="DataletData">2026</td><td class="DataletData">{face_2026}</td><td class="DataletData">{balance_2026}</td></tr>
+</table>
+</body>
+</html>
