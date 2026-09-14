@@ -35,6 +35,9 @@ def _isolation(monkeypatch):
     import app.jobs.queue as queue_module
 
     monkeypatch.setattr(queue_module.random, "uniform", lambda a, b: 0.0)
+    from app.connectors import iasworld_client
+
+    iasworld_client.reset_sessions()
     yield
 
 
@@ -119,3 +122,35 @@ def gis_router(respx_mock) -> None:
         side_effect=lambda req: gis_response("montco", req))
     respx_mock.get(url__startswith="https://gis.delcopa.gov/arcgis/rest/services/Parcels/Parcels_Public_Access").mock(
         side_effect=lambda req: gis_response("delco", req))
+
+
+def delco_iasworld_router(respx_mock, page_html: str, *, captcha: bool = False, tabs: dict[str, str] | None = None) -> dict[str, int]:
+    """Mock the Delco iasWorld disclaimer + datalet endpoints. Returns a live hit-counter for assertions."""
+    host = "http://delcorealestate.co.delaware.pa.us"
+    disclaimer = f"{host}/pt/Search/Disclaimer.aspx"
+    counts = {"accept": 0, "datalet": 0}
+    disclaimer_html = (
+        '<form id="Form1"><input id="__VIEWSTATE" value="vs"/><input id="__VIEWSTATEGENERATOR" value="g"/>'
+        '<input id="__EVENTVALIDATION" value="ev"/><input name="btAgree" value="Agree"/></form>'
+    )
+    if captcha:
+        disclaimer_html += '<script src="https://www.google.com/recaptcha/api.js"></script><div class="g-recaptcha"></div>'
+
+    def on_disclaimer(request: httpx.Request) -> httpx.Response:
+        if request.method == "POST":
+            counts["accept"] += 1
+            return httpx.Response(200, text="<html>commonsearch results</html>",
+                                  headers={"content-type": "text/html", "set-cookie": "DISCLAIMER=1; path=/"},
+                                  request=request)
+        return httpx.Response(200, text=disclaimer_html, headers={"content-type": "text/html"})
+
+    def on_datalet(request: httpx.Request) -> httpx.Response:
+        counts["datalet"] += 1
+        mode = httpx.QueryParams(request.url.query.decode() if isinstance(request.url.query, bytes) else request.url.query).get("mode", "")
+        body = (tabs or {}).get(mode, page_html)
+        return httpx.Response(200, text=body, headers={"content-type": "text/html"})
+
+    respx_mock.get(f"{host}/robots.txt").mock(return_value=httpx.Response(404))
+    respx_mock.route(url__startswith=disclaimer).mock(side_effect=on_disclaimer)
+    respx_mock.get(url__startswith=f"{host}/pt/datalets/datalet.aspx").mock(side_effect=on_datalet)
+    return counts

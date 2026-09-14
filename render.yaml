@@ -17,6 +17,10 @@ services:
         value: local
       - key: USI_SEED_DEMO
         value: "true"
+      # Accept the automated sources' terms at start-up (Delco assessment/tax portal, Montco Tax Claim Bureau)
+      # so a project the boss creates enriches without a manual acknowledgement step. Recorded in the audit log.
+      - key: USI_AUTO_ACCEPT_TERMS
+        value: "true"
       - key: USI_RUN_WORKER_IN_API
         value: "true"
       - key: USI_DATA_DIR

@@ -44,6 +44,9 @@ class Settings(BaseSettings):
     site_username: str = "demo"
     site_password: str | None = None  # when set, HTTP Basic auth protects the whole site except /api/health
     seed_demo: bool = False  # load the anonymized demo projects at start-up (scripts/serve.py)
+    # When true, the operator is acknowledging the terms of every "automated_requires_terms_ack" source at start-up
+    # (Delco assessment/tax portal disclaimer, Montco Tax Claim Bureau). Recorded in the audit log.
+    auto_accept_terms: bool = False
 
     @property
     def is_production(self) -> bool:

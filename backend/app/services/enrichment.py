@@ -54,7 +54,7 @@ RAW_CODE_FOR = {"land_use_description": "LAND_USE", "school_district": "SCH_DIST
                 "exterior_wall": "EXTWALL", "structure_description": "STRUCTURE", "property_class": "CLASS"}
 DEFAULT_CAPTURE = {
     "montco": ["montco.recorder", "montco.civil"],
-    "delco": ["delco.assessment_portal", "delco.recorder_countyweb", "delco.civil"],
+    "delco": ["delco.recorder_countyweb", "delco.civil"],
 }
 
 

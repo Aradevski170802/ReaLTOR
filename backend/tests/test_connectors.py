@@ -181,9 +181,14 @@ def test_delco_civil_filters_by_classification_and_derives_names():
 
 
 def test_user_assisted_lookup_never_fetches():
+    # Recorder guest capture and civil party search remain user-assisted: lookup() returns USER_ACTION and fetches nothing.
+    from app.connectors.montco.recorder import MontcoRecorderAdapter
+
     with respx.mock(assert_all_mocked=True):  # any real HTTP call would raise
-        outcome = DelcoAssessmentPortalAdapter().lookup(ref("delco", "01-00-00254-00"))
-    assert outcome.status == LookupStatus.USER_ACTION and outcome.capture.url.startswith("http://delcorealestate")
+        outcome = MontcoRecorderAdapter().lookup(ref("montco", "02-00-02904-00-1"))
+        civil = DelcoCivilAdapter().lookup(ref("delco", "01-00-00254-00"))
+    assert outcome.status == LookupStatus.USER_ACTION and outcome.capture is not None
+    assert civil.status == LookupStatus.USER_ACTION
 
 
 def test_arcgis_error_body_is_unexpected():

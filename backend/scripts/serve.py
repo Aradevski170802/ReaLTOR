@@ -29,6 +29,12 @@ def main() -> None:
     settings.ensure_dirs()
     init_engine()
     run_migrations()
+    if settings.auto_accept_terms:
+        from app.db import session_scope
+        from app.services.policies import acknowledge_automated_terms
+
+        with session_scope() as s:
+            print("Auto-acknowledged source terms:", acknowledge_automated_terms(s, "operator (USI_AUTO_ACCEPT_TERMS)"), flush=True)
     if settings.seed_demo:
         from app.seed import seed_demo
 

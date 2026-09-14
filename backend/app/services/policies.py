@@ -5,7 +5,7 @@ from __future__ import annotations
 from sqlalchemy.orm import Session
 
 from app.audit import record_audit
-from app.connectors.registry import get_source
+from app.connectors.registry import all_sources, get_source
 from app.db import utcnow
 from app.models import SourcePolicy
 
@@ -36,6 +36,20 @@ def revoke_terms(session: Session, source_key: str, actor: str) -> SourcePolicy:
     policy.terms_acknowledged_at = None
     record_audit(session, actor, "source.terms_revoked", "source_policy", source_key)
     return policy
+
+
+def acknowledge_automated_terms(session: Session, actor: str) -> list[str]:
+    """Acknowledge terms for every source that can run automatically once terms are accepted. Idempotent."""
+    acknowledged: list[str] = []
+    for adapter in all_sources():
+        d = adapter.descriptor
+        if not d.requires_terms_ack:
+            continue
+        policy = get_policy(session, d.key)
+        if policy.terms_acknowledged_at is None:
+            acknowledge_terms(session, d.key, actor, "Acknowledged automatically at start-up (USI_AUTO_ACCEPT_TERMS)")
+            acknowledged.append(d.key)
+    return acknowledged
 
 
 def set_enabled(session: Session, source_key: str, enabled: bool, actor: str) -> SourcePolicy:

@@ -80,48 +80,76 @@ def parse_datalet(content: str) -> DataletDocument:
     return _parse_text(content)
 
 
+def parse_datalets(content: str) -> DataletDocument:
+    """Parse content that may contain several concatenated HTML documents (multiple portal tabs).
+
+    An HTML parser keeps only the first <html> document when several are concatenated, so the app's automated
+    multi-tab fetch and a user pasting several saved pages must be split first, then merged. Splits on the
+    app's `<!-- datalet mode=... -->` markers, or on <!doctype/<html boundaries when several are present.
+    """
+    parts = re.split(r"<!--\s*datalet mode=[^>]*-->", content)
+    parts = [p for p in parts if p.strip()]
+    if len(parts) <= 1:
+        boundaries = list(re.finditer(r"(?is)<!doctype\b|<html\b", content))
+        if len(boundaries) > 1:
+            starts = [m.start() for m in boundaries] + [len(content)]
+            parts = [content[starts[i]:starts[i + 1]] for i in range(len(boundaries))]
+        else:
+            parts = [content]
+    merged = DataletDocument(sections=[])
+    for part in parts:
+        doc = parse_datalet(part)
+        merged.sections.extend(doc.sections)
+        merged.page_title = merged.page_title or doc.page_title
+    return merged
+
+
 def _parse_html(content: str) -> DataletDocument:
     soup = BeautifulSoup(content, "lxml")
     title = clean_ws(soup.title.get_text()) if soup.title else None
     sections: list[Section] = []
     current = Section(title="Page")
     sections.append(current)
+    top_headings: list[str] | None = None
 
-    for table in soup.find_all("table"):
-        if table.find("table"):
-            continue  # layout wrapper; inner tables are processed on their own
-        rows = table.find_all("tr")
-        header_cells = table.select("td.DataletHeader, th.DataletHeader")
-        if header_cells and len(rows) <= 1:
-            current = Section(title=_cell_text(header_cells[0]))
-            sections.append(current)
+    # Row-centric pass over the whole document. iasWorld nests its data tables inside layout tables, so a
+    # table-by-table walk that skips wrappers loses the residential/commercial/tax rows; every <tr> appears
+    # exactly once in this pass regardless of nesting.
+    for tr in soup.find_all("tr"):
+        cells = tr.find_all(["td", "th"], recursive=False)
+        if not cells:
             continue
-        table_title = table.get("id") or ""
-        top_headings: list[str] | None = None
-        for tr in rows:
-            cells = tr.find_all(["td", "th"], recursive=False)
-            if not cells:
-                continue
-            classes = [" ".join(c.get("class") or []) for c in cells]
-            texts = [_cell_text(c) for c in cells]
-            if any("DataletHeader" in c for c in classes):
-                current = Section(title=texts[0] or table_title or "Section")
+        classes = [" ".join(c.get("class") or []) for c in cells]
+        texts = [_cell_text(c) for c in cells]
+        joined = " ".join(classes)
+        # Section markers: iasWorld uses DataletHeader (grey bar) and DataletTitleColor ("Residential", "Commercial", ...)
+        if "DataletHeader" in joined or "DataletTitleColor" in joined:
+            title = next((t for t in texts if t), "Section")
+            if title and not title.startswith("PARID"):
+                current = Section(title=title)
                 sections.append(current)
-                top_headings = None
-                continue
-            if all("DataletTopHeading" in c for c in classes) or (tr.find("th") and not tr.find("td")):
-                top_headings = texts
-                continue
-            if len(cells) == 2 and ("DataletSideHeading" in classes[0] or texts[0].endswith(":")):
-                label = texts[0].rstrip(":").strip()
-                if label:
-                    current.pairs.setdefault(label, texts[1])
-                continue
-            if top_headings and len(texts) == len(top_headings):
-                current.rows.append(dict(zip(top_headings, texts, strict=True)))
-                continue
-            if len(cells) == 2 and texts[0] and not top_headings:
-                current.pairs.setdefault(texts[0].rstrip(":"), texts[1])
+            top_headings = None
+            continue
+        if "DataletHeaderTop" in joined or "DataletHeaderBottom" in joined:
+            continue  # the PARID / owner banner repeated on every tab
+        # Grid column headings (sales, delinquent-tax and receivable grids)
+        if texts and all("DataletTopHeading" in c for c in classes):
+            top_headings = [t for t in texts]
+            continue
+        # Label/value pairs, including rows that pack several pairs side by side (label|value|label|value|...)
+        side_idx = [i for i, c in enumerate(classes) if "DataletSideHeading" in c]
+        if side_idx:
+            for i in side_idx:
+                label = texts[i].rstrip(":").strip()
+                value = texts[i + 1] if i + 1 < len(texts) else ""
+                if label and label != "&nbsp;":
+                    current.pairs.setdefault(label, value)
+            continue
+        if top_headings and len(texts) == len(top_headings) and any(texts):
+            current.rows.append(dict(zip(top_headings, texts, strict=True)))
+            continue
+        if len(cells) == 2 and texts[0] and texts[0].endswith(":"):
+            current.pairs.setdefault(texts[0].rstrip(":"), texts[1])
     # Delco/Montco also render some values as "<span>Label:</span> value" outside tables
     for label_el in soup.find_all(string=re.compile(r"^\s*[A-Z][A-Za-z /#&.-]{2,40}:\s*$")):
         parent = label_el.parent
