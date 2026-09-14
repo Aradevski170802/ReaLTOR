@@ -10,6 +10,7 @@ from app.connectors.montco.gis import MontcoAssessmentGisAdapter
 from app.connectors.montco.portal import MontcoAssessmentPortalAdapter
 from app.connectors.montco.recorder import MontcoRecorderAdapter
 from app.connectors.montco.tax_claim import MontcoTaxClaimAdapter
+from app.connectors.montco.ujs import MontcoUjsJudgmentsAdapter
 
 
 class MontcoConnector(CountyConnector):
@@ -27,6 +28,7 @@ class MontcoConnector(CountyConnector):
             MontcoAssessmentPortalAdapter(),
             MontcoRecorderAdapter(),
             MontcoCivilAdapter(),
+            MontcoUjsJudgmentsAdapter(),
         ]
 
     def sources(self) -> list[SourceAdapter]:

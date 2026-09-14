@@ -142,7 +142,7 @@ installed (`python -m playwright install --with-deps chromium`).
 | Parcel / assessment / GIS | Automated (ArcGIS API + iasWorld portal) | Automated (ArcGIS API) |
 | Delinquent taxes | Automated (iasWorld portal) | Automated (Tax Claim Bureau, after terms ack) |
 | Market valuation | Automated (keyless local estimate; AVM APIs if keys added) | Automated (same) |
-| **Civil liens** | **Automated** via C-Track browser automation (this doc) | **No automated path** — the court portal (PSI) is behind a Cloudflare "verify you are human" challenge with no bulk/API data, which is never bypassed. Stays a user-assisted capture task. |
+| **Civil liens** | **Automated** via C-Track browser automation (this doc) | Municipal liens (Prothonotary) have **no automated path** — the PSI court portal is behind a Cloudflare "verify you are human" challenge, never bypassed. The **PA UJS portal** (no CAPTCHA) *is* automated for Montgomery **Magisterial-District civil judgments** (`montco.ujs_judgments`) — a distress signal, not recorded municipal liens. |
 | Mortgages (recorder) | User-assisted — the recorder dropped guest access and now requires an account; automation would need your own credentials. | User-assisted — Recorder of Deeds requires your own account. |
 
 So: **Delaware liens are the piece this browser automation makes hands-free.** Montgomery liens and both counties'
