@@ -9,7 +9,7 @@ from typing import Any
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.enums import RETRYABLE_STATUSES, LookupStatus
+from app.enums import RETRYABLE_STATUSES, ImportStatus, LookupStatus
 from app.jobs.queue import RetryableJobError, enqueue, set_progress
 from app.models import ImportedSaleList, Job, Project, Property
 
@@ -44,6 +44,36 @@ def _target_properties(session: Session, project_id: int, selection: Any) -> lis
     elif isinstance(selection, list):
         query = query.where(Property.id.in_([int(x) for x in selection]))
     return list(session.scalars(query.order_by(Property.sequence, Property.id)))
+
+
+@handler("autopilot")
+def autopilot(session: Session, job: Job) -> dict[str, Any]:
+    """One-touch pipeline: commit the latest reviewed import, then enrich every property via all its sources.
+
+    Automated sources (county GIS, Delaware assessment/tax portal, Montgomery Tax Claim) run with no human step;
+    sources that still need a person (recorder, civil) are queued as capture tasks. Valuations and rule scoring run
+    per property inside enrich_property.
+    """
+    from app.services.imports import commit_import
+
+    result: dict[str, Any] = {}
+    imp = session.scalar(
+        select(ImportedSaleList).where(ImportedSaleList.project_id == job.project_id).order_by(ImportedSaleList.id.desc())
+    )
+    if imp is not None and imp.status == ImportStatus.REVIEW:
+        committed = commit_import(session, imp, job.created_by or "autopilot", confirm_overwrite=bool(job.payload.get("confirm_overwrite")))
+        result["committed"] = {"created": committed.created, "updated": committed.updated, "skipped": len(committed.skipped)}
+        session.flush()
+    ids = _target_properties(session, job.project_id, "all")
+    if not ids:
+        raise ValueError("No properties to enrich — the sale list has no committed rows")
+    for pid in ids:
+        enqueue(session, "enrich_property", {"property_id": pid, "force": job.payload.get("force", False)},
+                project_id=job.project_id, property_id=pid, parent_id=job.id,
+                idempotency_key=f"autopilot-enrich:{pid}", created_by=job.created_by)
+    set_progress(session, job.id, 0, len(ids))
+    result["queued"] = len(ids)
+    return result
 
 
 @handler("enrich_batch")

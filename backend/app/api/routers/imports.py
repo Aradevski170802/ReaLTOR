@@ -33,7 +33,7 @@ def _row_out(row: ExtractedRow) -> dict:
 
 @router.post("/projects/{project_id}/imports", status_code=201)
 async def upload_sale_list(project_id: int, file: UploadFile = File(...), parse_now: bool = Query(False),
-                           session: Session = Depends(get_session), actor: Actor = Depends(analyst)):
+                           autopilot: bool = Query(False), session: Session = Depends(get_session), actor: Actor = Depends(analyst)):
     project = get_or_404(session, Project, project_id)
     data = await file.read()
     try:
@@ -41,13 +41,18 @@ async def upload_sale_list(project_id: int, file: UploadFile = File(...), parse_
     except ValueError as exc:
         raise HTTPException(400, str(exc)) from exc
     job_id = None
-    if parse_now:
+    if autopilot:
+        # Parse now, then hand off to the autopilot job which commits and enriches everything.
+        run_parse(session, sale_list, actor.name)
+        job_id = enqueue(session, "autopilot", {}, project_id=project.id, created_by=actor.name,
+                         idempotency_key=f"autopilot:{project.id}", max_attempts=1).id
+    elif parse_now:
         run_parse(session, sale_list, actor.name)
     else:
         job_id = enqueue(session, "parse_import", {"import_id": sale_list.id}, project_id=project.id,
                          idempotency_key=f"parse:{sale_list.id}", created_by=actor.name, max_attempts=1).id
     session.commit()
-    return {"import": ImportOut.model_validate(sale_list).model_dump(), "job_id": job_id}
+    return {"import": ImportOut.model_validate(sale_list).model_dump(), "job_id": job_id, "autopilot": autopilot}
 
 
 @router.get("/projects/{project_id}/imports", response_model=list[ImportOut])

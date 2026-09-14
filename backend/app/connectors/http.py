@@ -109,6 +109,11 @@ class RobotsCache:
         return parser, f"robots.txt checked at {origin}"
 
 
+# Test-only escape hatch: when true, RateLimiter.acquire returns immediately. Never set in production;
+# the tests set it so a no-op sleep (which would otherwise leave the wall clock unadvanced) cannot spin.
+DISABLE_RATE_LIMIT = False
+
+
 class RateLimiter:
     def __init__(self, per_minute: int, min_interval: float):
         self.per_minute = max(1, per_minute)
@@ -117,6 +122,8 @@ class RateLimiter:
         self._lock = threading.Lock()
 
     def acquire(self, sleep=time.sleep, clock=time.monotonic) -> float:
+        if DISABLE_RATE_LIMIT:
+            return 0.0
         waited = 0.0
         while True:
             with self._lock:

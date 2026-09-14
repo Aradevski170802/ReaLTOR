@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { api } from '../api';
 import { useAsyncAction, useFetch } from '../hooks';
 import { DECISION_TONE, formatDate } from '../format';
@@ -18,7 +18,13 @@ interface Summary {
 export default function OverviewPanel({ project }: { project: Project }) {
   const { data, error, reload } = useFetch<Summary>(`/api/projects/${project.id}/summary`);
   const action = useAsyncAction();
+  const navigate = useNavigate();
   const refresh = () => action.run(async () => api.post(`/api/projects/${project.id}/refresh-tax-status`, {}).then(reload));
+  const autopilot = () =>
+    action.run(async () => {
+      await api.post(`/api/projects/${project.id}/autopilot`);
+      navigate(`/projects/${project.id}/jobs`);
+    });
 
   return (
     <div className="grid-2">
@@ -45,7 +51,10 @@ export default function OverviewPanel({ project }: { project: Project }) {
           <button onClick={refresh} disabled={action.busy}>
             Refresh tax status now
           </button>
-          <Link className="button primary" to={`/projects/${project.id}/results`}>
+          <button className="primary" onClick={autopilot} disabled={action.busy} title="Commit the latest sale list and run every automated source and scoring for all properties">
+            Auto-run everything ▶
+          </button>
+          <Link className="button" to={`/projects/${project.id}/results`}>
             Open results
           </Link>
         </div>
@@ -88,10 +97,10 @@ export default function OverviewPanel({ project }: { project: Project }) {
       </Section>
       <Section title="How this project works">
         <ol className="steps">
-          <li>Upload the county's upset-sale PDF. Check the extracted rows and fix anything flagged, then commit.</li>
-          <li>Pick 7–8 pilot properties and run enrichment. Automated sources run straight away: the county GIS services, plus Montgomery's Tax Claim Bureau once its terms are acknowledged.</li>
-          <li>Work through user-assisted tasks for sources with disclaimers, logins or human checks. Open the official page, then paste or upload what you see.</li>
-          <li>Review the results grid, override where you have better information (a reason is required), then run the full list.</li>
+          <li><strong>Fastest path:</strong> on the Import tab choose the county PDF and click <strong>Upload &amp; auto-run</strong> — it extracts, commits, pulls every automated source, values each property and scores it, with no further clicks. Or use <strong>Auto-run everything</strong> above once a list is imported.</li>
+          <li>Automated with no human step: the county GIS assessment data, the Delaware County assessment/tax portal, and the Montgomery County Tax Claim Bureau (taxes). Market values need a valuation API key in Settings.</li>
+          <li>Still need a person (a disclaimer login or a human-verification check): the Recorder of Deeds (mortgages) and civil/lien search. These appear under User-assisted tasks — open the official page and paste or upload what you see.</li>
+          <li>Review the results grid, override where you have better information (a reason is required).</li>
           <li>Export the workbook. Tax status refreshes daily; sources that need a person create re-capture tasks.</li>
         </ol>
       </Section>

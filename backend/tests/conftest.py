@@ -32,6 +32,7 @@ def _isolation(monkeypatch):
 
     http_module.reset_http_state()
     monkeypatch.setattr(http_module.time, "sleep", lambda *_: None)
+    monkeypatch.setattr(http_module, "DISABLE_RATE_LIMIT", True)
     import app.jobs.queue as queue_module
 
     monkeypatch.setattr(queue_module.random, "uniform", lambda a, b: 0.0)

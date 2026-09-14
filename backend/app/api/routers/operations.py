@@ -46,6 +46,16 @@ def enrich(project_id: int, body: EnrichIn, session: Session = Depends(get_sessi
     return {"job_id": job.id}
 
 
+@router.post("/projects/{project_id}/autopilot")
+def autopilot(project_id: int, session: Session = Depends(get_session), actor: Actor = Depends(analyst)):
+    project = get_or_404(session, Project, project_id)
+    job = enqueue(session, "autopilot", {}, project_id=project.id, created_by=actor.name,
+                  idempotency_key=f"autopilot:{project.id}", max_attempts=1)
+    record_audit(session, actor.name, "project.autopilot", "project", project.id, project.id, {"job_id": job.id})
+    session.commit()
+    return {"job_id": job.id}
+
+
 @router.get("/jobs")
 def list_jobs(project_id: int | None = None, status: str | None = None, kind: str | None = None, limit: int = 100,
               include_children: bool = False, session: Session = Depends(get_session), _: Actor = Depends(viewer)):

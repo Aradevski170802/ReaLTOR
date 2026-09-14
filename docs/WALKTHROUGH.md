@@ -2,6 +2,10 @@
 
 Start the app with `python dev.py` (add `--seed` for the demo projects) and open http://127.0.0.1:5173.
 
+## Fastest path: Autopilot
+
+Create a project, then on **1 · Import & review** choose the county PDF and click **Upload & auto-run**. The app extracts the list, commits every valid row, and for each property runs all automated sources (county GIS assessment, the Delaware County assessment/tax portal, the Montgomery County Tax Claim Bureau), computes the market valuation and applies the screening rules — with no further clicks. Sources that still need a person (Recorder of Deeds, civil/lien search) are queued under **3 · User-assisted tasks**. You can also click **Auto-run everything** on the Overview tab at any time. The step-by-step flow below is the manual equivalent.
+
 ## 1. Create a project
 
 **Projects → New research project**: enter a name and choose **Montgomery County, Pennsylvania** or **Delaware County, Pennsylvania**. The Delaware option notes that it is the Pennsylvania county, not the State of Delaware.

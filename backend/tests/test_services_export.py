@@ -166,3 +166,32 @@ def test_worker_processes_export_job(db):
     assert Worker(enable_scheduler=False).run_until_empty() == 1
     db.expire_all()
     assert db.get(type(job), job.id).status == "succeeded"
+
+
+def test_autopilot_commits_and_enriches_montco(db):
+    from app.jobs.queue import enqueue
+    from app.services.policies import acknowledge_automated_terms
+
+    project = Project(name="Autopilot montco", county="montco", created_by="tester")
+    db.add(project)
+    db.flush()
+    sale_list = save_upload(db, project, MONTCO_PDF.name, MONTCO_PDF.read_bytes(), "tester")
+    run_parse(db, sale_list, "tester")  # status = review, nothing committed yet
+    acknowledge_automated_terms(db, "tester")  # so the Tax Claim source runs automatically
+    assert db.scalar(select(Property).where(Property.project_id == project.id)) is None
+    enqueue(db, "autopilot", {}, project_id=project.id, created_by="tester")
+    db.commit()
+
+    with respx.mock(assert_all_called=False) as mock:
+        gis_router(mock)
+        taxclaim_router(mock, resolved_parcels={"02-00-02904-00-1"})
+        processed = Worker(enable_scheduler=False).run_until_empty()
+    assert processed >= 55  # 1 autopilot + one enrich_property per committed row
+    db.expire_all()
+    props = db.scalars(select(Property).where(Property.project_id == project.id)).all()
+    assert len(props) == 55
+    assert all(p.decision_status for p in props)  # every property was scored with no manual step
+    duplex = db.scalar(select(Property).where(Property.parcel_normalized == "02-00-01016-00-8"))
+    snap = load_snapshots(db, [duplex.id], active_config(db))[duplex.id]
+    assert snap.value("land_use_description") == "R - DUPLEX"  # GIS ran automatically
+    assert snap.value("tax_2024_balance") is not None  # Tax Claim ran automatically

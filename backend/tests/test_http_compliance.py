@@ -84,7 +84,10 @@ def test_forbidden_and_auth(respx_mock):
     assert forbidden.value.status == LookupStatus.BLOCKED and auth.value.status == LookupStatus.AUTH_NEEDED
 
 
-def test_rate_limiter_enforces_interval_and_budget():
+def test_rate_limiter_enforces_interval_and_budget(monkeypatch):
+    import app.connectors.http as http_module
+
+    monkeypatch.setattr(http_module, "DISABLE_RATE_LIMIT", False)  # exercise the real limiter here
     clock = {"t": 0.0}
     slept = []
 

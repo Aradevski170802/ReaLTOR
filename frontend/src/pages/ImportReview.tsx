@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { api, ApiError } from '../api';
 import { useAsyncAction, useFetch, useInterval } from '../hooks';
 import { formatDate } from '../format';
@@ -17,6 +18,7 @@ export default function ImportReview({ project }: { project: Project }) {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const upload = useAsyncAction();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (selectedId === null && imports.data?.length) setSelectedId(imports.data[0].id);
@@ -24,15 +26,19 @@ export default function ImportReview({ project }: { project: Project }) {
   const parsing = imports.data?.some((i) => i.status === 'uploaded' || i.status === 'parsing') ?? false;
   useInterval(imports.reload, 2500, parsing);
 
-  const doUpload = () =>
+  const doUpload = (autopilot = false) =>
     upload.run(async () => {
       if (!file) return;
       const form = new FormData();
       form.append('file', file);
-      const res = await api.upload<{ import: ImportRecord }>(`/api/projects/${project.id}/imports`, form);
+      const res = await api.upload<{ import: ImportRecord; job_id: number | null }>(
+        `/api/projects/${project.id}/imports?autopilot=${autopilot}`,
+        form,
+      );
       setFile(null);
       setSelectedId(res.import.id);
       imports.reload();
+      if (autopilot) navigate(`/projects/${project.id}/jobs`);
     });
 
   const selected = imports.data?.find((i) => i.id === selectedId) ?? null;
@@ -45,10 +51,18 @@ export default function ImportReview({ project }: { project: Project }) {
         </p>
         <div className="row gap">
           <input type="file" accept=".pdf,.csv,.xlsx,.xlsm" onChange={(e) => setFile(e.target.files?.[0] ?? null)} aria-label="Sale list file" />
-          <button className="primary" disabled={!file || upload.busy} onClick={doUpload}>
-            {upload.busy ? 'Uploading…' : 'Upload & extract'}
+          <button disabled={!file || upload.busy} onClick={() => doUpload(false)}>
+            {upload.busy ? 'Working…' : 'Upload & review'}
+          </button>
+          <button className="primary" disabled={!file || upload.busy} onClick={() => doUpload(true)}
+                  title="Extract, commit, and run every automated source and scoring with no further clicks">
+            {upload.busy ? 'Working…' : 'Upload & auto-run ▶'}
           </button>
         </div>
+        <p className="muted small">
+          <strong>Upload &amp; auto-run</strong> extracts the list, commits every valid row, then automatically pulls assessment, taxes and
+          valuations and scores each property. Sources that still need a person (recorder, civil) are queued under User-assisted tasks.
+        </p>
         <ErrorNote error={upload.error ?? imports.error} />
         {imports.data && imports.data.length > 0 && (
           <table className="table compact">
