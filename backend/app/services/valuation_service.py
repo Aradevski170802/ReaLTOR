@@ -57,7 +57,11 @@ def active_providers(session: Session, is_demo: bool) -> list[str]:
             if cfg is None or cfg.enabled:
                 keys.append(key)
             continue
-        if cfg and cfg.enabled and not provider.missing_secrets(provider_secrets(session, key)):
+        # A keyed provider runs once its key is configured, unless explicitly disabled. Verified integrations
+        # (ATTOM, RentCast) auto-activate when a key is present; unverified ones (Zillow Bridge) need an explicit enable.
+        if provider.missing_secrets(provider_secrets(session, key)):
+            continue
+        if (cfg and cfg.enabled) or (cfg is None and d.verified_integration):
             keys.append(key)
     return keys
 

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from app.common.parcels import ParcelParts
+from app.connectors.attom import DelcoAttomAdapter
 from app.connectors.base import CountyConnector, SourceAdapter
 from app.connectors.delco.civil import DelcoCivilAdapter
 from app.connectors.delco.gis import DelcoParcelsGisAdapter
@@ -21,6 +22,7 @@ class DelcoConnector(CountyConnector):
     def __init__(self):
         self._sources: list[SourceAdapter] = [
             DelcoParcelsGisAdapter(),
+            DelcoAttomAdapter(),
             DelcoAssessmentPortalAdapter(),
             DelcoTreasurerAdapter(),
             DelcoPublicSearchRecorderAdapter(),

@@ -308,11 +308,12 @@ def enrich_property(session: Session, prop: Property, *, actor: str = "system", 
     return summary
 
 
-def _browser_secrets(session: Session, adapter: SourceAdapter) -> dict[str, str]:
+def _adapter_secrets(session: Session, adapter: SourceAdapter) -> dict[str, str]:
+    """Secrets an adapter declares it needs (API keys for HTTP sources, or login credentials for browser sources)."""
     from app.security.secrets import get_secret
 
     out: dict[str, str] = {}
-    for name in getattr(adapter, "credential_secrets", ()):  # e.g. site.<key>.username / .password
+    for name in getattr(adapter, "credential_secrets", ()):  # e.g. provider.attom.api_key, site.<key>.username / .password
         value = get_secret(session, name)
         if value:
             out[name] = value
@@ -323,7 +324,7 @@ def _run_browser_source(session: Session, prop: Property, adapter: SourceAdapter
                         job_id: int | None) -> str:
     from app.connectors.browser import BrowserRunner
 
-    secrets = _browser_secrets(session, adapter)
+    secrets = _adapter_secrets(session, adapter)
     if runner_box.get("runner") is None:
         runner_box["runner"] = BrowserRunner().__enter__()
     try:
@@ -359,7 +360,8 @@ def _enrich_sources(session: Session, prop: Property, connector, wanted, force, 
                 summary[d.key] = "cached"
                 continue
             try:
-                outcome = adapter.lookup(property_ref(prop))
+                creds = getattr(adapter, "credential_secrets", ())
+                outcome = adapter.lookup(property_ref(prop), _adapter_secrets(session, adapter)) if creds else adapter.lookup(property_ref(prop))
             except Exception as exc:  # adapters should not raise, but never lose the error
                 log.exception("Adapter %s failed for property %s", d.key, prop.id)
                 outcome = SourceOutcome(LookupStatus.UNEXPECTED, f"{type(exc).__name__}: {exc}")
@@ -377,7 +379,7 @@ def _enrich_sources(session: Session, prop: Property, connector, wanted, force, 
                 continue
             # Prefer real-browser automation for sources that support it (public, no-CAPTCHA portals).
             if adapter.browser_capable and browser_available():
-                ready, why = adapter.browser_ready(_browser_secrets(session, adapter))
+                ready, why = adapter.browser_ready(_adapter_secrets(session, adapter))
                 if ready:
                     if not force and _fresh_success(session, prop.id, d.key, d.cache_ttl_hours):
                         summary[d.key] = "cached"

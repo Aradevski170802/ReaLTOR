@@ -10,6 +10,7 @@ from __future__ import annotations
 import base64
 import hashlib
 import logging
+import os
 import re
 import threading
 from pathlib import Path
@@ -143,9 +144,19 @@ def set_secret(session: Session, name: str, value: str, actor: str) -> Encrypted
     return row
 
 
+def env_secret_var(name: str) -> str:
+    """Environment-variable name a secret can be supplied through, e.g. provider.attom.api_key -> USI_SECRET_PROVIDER_ATTOM_API_KEY."""
+    return "USI_SECRET_" + re.sub(r"[^A-Za-z0-9]", "_", name).upper()
+
+
 def get_secret(session: Session, name: str) -> str | None:
     row = session.scalar(select(EncryptedSecret).where(EncryptedSecret.name == name))
     if row is None:
+        # Fallback: allow supplying secrets by environment variable (handy for headless deployments and CI).
+        env_value = os.environ.get(env_secret_var(name))
+        if env_value:
+            register_secret_value(env_value)
+            return env_value
         return None
     try:
         value = _fernet().decrypt(row.ciphertext.encode()).decode()

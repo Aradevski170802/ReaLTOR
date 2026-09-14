@@ -36,7 +36,7 @@ Rules applied to every source:
 
 | Provider | Access |
 |---|---|
-| ATTOM Property API (AVM) | Documented API, `apikey` header |
+| ATTOM Property API | Documented API, `apikey` header. Used for the AVM **and** as an automated property-enrichment source (`{county}.attom`): `attomavm/detail` keyed by APN + county FIPS (address fallback) returns owner, absentee status and mailing address, assessed & market value, building/lot detail and last sale. Licensed data — display/retention per the ATTOM agreement; the key is stored encrypted. |
 | RentCast `/v1/avm/value` | Documented API, `X-Api-Key` header |
 | Zillow via Bridge Interactive | Only with an approved agreement; field mapping must be verified |
 | Zillow, Realtor.com, Homes.com, Redfin, Trulia websites | **Never scraped.** Users may record values they looked up themselves as manual observations. |

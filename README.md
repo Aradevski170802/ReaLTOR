@@ -199,6 +199,7 @@ Nothing is ever bypassed. Full details: [docs/SOURCE_ACCESS.md](docs/SOURCE_ACCE
 | Delaware | Recorder of Deeds (publicsearch.us, countyweb guest) | User-assisted | publicsearch robots.txt allows only the home page; countyweb needs a guest login plus disclaimer |
 | Delaware | Civil public access — C-Track (party search for **liens**) | **Automated with a real browser when enabled**; otherwise user-assisted | Public access is a plain "CONTINUE AS PUBLIC USER" click — no login, no CAPTCHA. When `USI_BROWSER_AUTOMATION=true`, the app drives it with Chromium, runs a Party Search per derived name (LAST, FIRST MI, or company), and keeps only "Lien" cases (flagged for review). Off by default / on Render free it falls back to a capture task. See [docs/DEPLOYMENT_BROWSER.md](docs/DEPLOYMENT_BROWSER.md). |
 | Delaware | Treasurer bill lookup | User-assisted | Payment-portal flow |
+| Both | **ATTOM Data — property detail & owner** | Automated (licensed API, your key) | One `attomavm/detail` call per parcel (keyed by APN + county FIPS, address fallback) fills owner name, **absentee status and mailing address**, assessed & market value, building/lot characteristics and last sale — with full provenance. Enabled by setting the ATTOM key (Settings or `USI_SECRET_PROVIDER_ATTOM_API_KEY`). |
 | Both | **Market valuation** | **Automated for every property (keyless)** | A built-in *Local estimate* values each property with no API key: assessed value × the county STEB Common Level Ratio factor (editable per county), or a recent arm's-length sale grown by an appreciation rate. A licensed AVM (ATTOM/RentCast) or a value you record yourself overrides it when present. |
 | Both | Recorder of Deeds (mortgages) | User-assisted with **your own account** | Recorder sites are stateful JavaScript apps behind a login (guest access was withdrawn). Export/paste the results and the app does the mortgage↔satisfaction matching automatically. |
 | Montgomery | Civil/lien court search (PSI) | User-assisted | Behind a Cloudflare "verify you are human" gate with no bulk/API data, which is never bypassed. (Delaware liens *are* automated — see the C-Track row above.) |
@@ -253,6 +254,7 @@ Copy `.env.example` to `.env` (repository root or `backend/`).
 | `USI_AUTO_MIGRATE` | `true` | Run Alembic migrations on API start-up |
 | `USI_BROWSER_AUTOMATION` | `false` | Drive public, no-CAPTCHA portals (Delaware C-Track liens) with Chromium. Needs Playwright + Chromium and ~1 GB RAM (not Render free). See [docs/DEPLOYMENT_BROWSER.md](docs/DEPLOYMENT_BROWSER.md) |
 | `USI_BROWSER_HEADLESS` / `USI_BROWSER_TIMEOUT_SECONDS` | `true` / `45` | Browser automation tuning |
+| `USI_SECRET_<NAME>` | — | Supply any encrypted secret by environment instead of the Settings UI. Name = the secret key upper-cased with non-alphanumerics as `_`, e.g. `USI_SECRET_PROVIDER_ATTOM_API_KEY` for the ATTOM key. Useful for headless deploys; the Settings UI value wins if both are set |
 
 ---
 

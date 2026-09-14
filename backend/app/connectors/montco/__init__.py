@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from app.common.parcels import ParcelParts
+from app.connectors.attom import MontcoAttomAdapter
 from app.connectors.base import CountyConnector, SourceAdapter
 from app.connectors.montco.civil import MontcoCivilAdapter
 from app.connectors.montco.gis import MontcoAssessmentGisAdapter
@@ -21,6 +22,7 @@ class MontcoConnector(CountyConnector):
     def __init__(self):
         self._sources: list[SourceAdapter] = [
             MontcoAssessmentGisAdapter(),
+            MontcoAttomAdapter(),
             MontcoTaxClaimAdapter(),
             MontcoAssessmentPortalAdapter(),
             MontcoRecorderAdapter(),

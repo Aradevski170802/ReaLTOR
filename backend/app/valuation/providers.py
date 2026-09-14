@@ -33,6 +33,23 @@ def _evidence(resp: httpx.Response, summary: str) -> EvidenceDraft:
                          http_status=resp.status_code, request_summary=redact_text(summary))
 
 
+def _attom_evidence(resp, summary: str) -> EvidenceDraft:
+    return EvidenceDraft(url=redact_text(resp.url), content=resp.content, content_type=resp.content_type,
+                         http_status=resp.status_code, request_summary=redact_text(summary))
+
+
+def _attom_failure(resp, provider: str = "ATTOM") -> ValuationResult | None:
+    """Failure mapping for the shared ATTOM client's AttomResponse (mirrors _http_failure for httpx responses)."""
+    if resp.status_code in (401, 403):
+        return ValuationResult(CoverageStatus.NOT_CONFIGURED, notes=f"{provider} rejected the API key (HTTP {resp.status_code})",
+                               evidence=_attom_evidence(resp, "auth failure"))
+    if resp.status_code == 429:
+        return ValuationResult(CoverageStatus.ERROR, notes=f"{provider} rate limit (HTTP 429)")
+    if resp.status_code >= 400 and not resp.properties:
+        return ValuationResult(CoverageStatus.ERROR, notes=f"{provider} HTTP {resp.status_code}", evidence=_attom_evidence(resp, "error"))
+    return None
+
+
 def _http_failure(resp: httpx.Response, provider: str) -> ValuationResult | None:
     if resp.status_code in (401, 403):
         return ValuationResult(CoverageStatus.NOT_CONFIGURED, notes=f"{provider} rejected the API key (HTTP {resp.status_code})",
@@ -136,15 +153,16 @@ class AttomProvider(ValuationProvider):
     def estimate(self, subject: ValuationSubject, secrets: dict[str, str], settings: dict) -> ValuationResult:
         if self.missing_secrets(secrets):
             return ValuationResult.status_only(CoverageStatus.NOT_CONFIGURED, "ATTOM API key not configured")
-        if not subject.street:
-            return ValuationResult.status_only(CoverageStatus.NO_MATCH, "No street address available for AVM lookup")
+        from app.connectors.attom_client import lookup_avm_detail
+
         address2 = ", ".join(x for x in (subject.city, " ".join(y for y in (subject.state, subject.zip_code) if y)) if x)
-        with _client() as client:
-            resp = client.get(self.ENDPOINT, params={"address1": subject.street, "address2": address2},
-                              headers={"apikey": secrets["provider.attom.api_key"], "Accept": "application/json"})
-        if failure := _http_failure(resp, "ATTOM"):
+        resp = lookup_avm_detail(key=secrets["provider.attom.api_key"], county=subject.county, parcel=subject.parcel,
+                                 address1=subject.street, address2=address2)
+        if resp is None:
+            return ValuationResult.status_only(CoverageStatus.NO_MATCH, "No parcel or address available for AVM lookup")
+        if failure := _attom_failure(resp):
             return failure
-        return self.parse(resp.json(), subject, _evidence(resp, f"GET attomavm/detail address1={subject.street} address2={address2}"))
+        return self.parse(resp.data, subject, _attom_evidence(resp, "GET attomavm/detail"))
 
     @staticmethod
     def parse(data: dict, subject: ValuationSubject, evidence: EvidenceDraft | None = None) -> ValuationResult:
