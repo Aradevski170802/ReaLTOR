@@ -150,6 +150,7 @@ class EstimateType(StrEnum):
     ASSESSOR_VALUE = "assessor_value"
     MARKET_AVM = "market_avm"
     SALE_ESTIMATE = "sale_estimate"
+    ASSESSMENT_RATIO = "assessment_ratio"
     RENT_ESTIMATE = "rent_estimate"
     LISTING_PRICE = "listing_price"
     MANUAL_OBSERVATION = "manual_observation"

@@ -11,7 +11,13 @@ from app.recorder.matching import DocView, apply_user_decisions, classify_docume
 from app.rules.defaults import default_rules, merge_rules, validate_rules
 from app.rules.engine import RuleInputs, evaluate
 from app.valuation.base import ValuationSubject, address_match_score
-from app.valuation.providers import AttomProvider, RentCastProvider, SandboxProvider, ZillowBridgeProvider
+from app.valuation.providers import (
+    AttomProvider,
+    LocalEstimateProvider,
+    RentCastProvider,
+    SandboxProvider,
+    ZillowBridgeProvider,
+)
 from app.valuation.selector import EstimateView, select_valuation
 from tests.conftest import FIXTURES
 
@@ -221,3 +227,37 @@ def test_selector_strategies():
 def test_address_match_score():
     assert address_match_score("1002 DEKALB ST, Bridgeport, PA", "1002 Dekalb Street, Bridgeport") == 1.0
     assert address_match_score("1002 DEKALB ST", "1004 DEKALB ST") == 0.0
+
+
+def test_local_estimate_uses_assessment_ratio_and_indexed_sale():
+    from datetime import date, timedelta
+
+    # Assessment ratio: assessed x county CLR factor, for a property with no usable sale.
+    montco = ValuationSubject(1, "montco", "x", "1 MAIN ST", "AMBLER", assessed_value=100_000)
+    r = LocalEstimateProvider().estimate(montco, {}, {})
+    assert r.coverage_status == "matched" and r.estimate_type == "assessment_ratio" and r.point == 202000  # 100k x 2.02
+    assert "CLR factor" in r.notes and r.confidence and r.confidence < 0.5
+
+    # Indexed recent sale is preferred over the assessment ratio when it is sane.
+    recent = ValuationSubject(1, "delco", "x", "1 MAIN ST", "ALDAN", assessed_value=100_000,
+                              last_sale_price=200_000, last_sale_date=date.today() - timedelta(days=365 * 4))
+    r2 = LocalEstimateProvider().estimate(recent, {}, {})
+    assert r2.estimate_type == "sale_estimate" and r2.point > 200_000
+
+    # No assessed value and no sale -> honest no_match (never invents a number).
+    assert LocalEstimateProvider().estimate(ValuationSubject(1, "delco", "x", None, None), {}, {}).coverage_status == "no_match"
+
+    # Editable factor is respected.
+    tuned = LocalEstimateProvider().estimate(montco, {}, {"factors": {"montco": 3.0}})
+    assert tuned.point == 300000
+
+
+def test_local_estimate_is_fallback_only_in_selector():
+    cfg = default_rules()["valuation_selection"]
+    local = ev(1, "local_estimate", 130000, estimate_type="assessment_ratio", confidence=0.45)
+    # With a real market value recorded, the local estimate is ignored (not dragged into "lowest").
+    with_manual = select_valuation([local, ev(2, "rentcast", 315000, estimate_type="manual_observation", entry_method="manual")], cfg, False, ["local_estimate"])
+    assert with_manual.value == 315000 and with_manual.provider_key != "local_estimate"
+    # Alone, it is used so every property still gets a value.
+    only_local = select_valuation([local], cfg, False, ["local_estimate"])
+    assert only_local.value == 130000 and only_local.method == "assessment_ratio"

@@ -47,7 +47,7 @@ DEFAULT_RULES: dict = {
         "primary_providers": ["attom", "rentcast", "zillow_bridge"],
         "min_confidence": 0.5,
         "min_match_score": 0.8,
-        "credible_estimate_types": ["market_avm", "sale_estimate", "manual_observation"],
+        "credible_estimate_types": ["market_avm", "sale_estimate", "assessment_ratio", "manual_observation"],
     },
 }
 

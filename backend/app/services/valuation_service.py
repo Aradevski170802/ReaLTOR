@@ -25,7 +25,10 @@ from app.valuation.selector import EstimateView, select_valuation
 def provider_config(session: Session, key: str) -> ProviderConfig:
     cfg = session.get(ProviderConfig, key)
     if cfg is None:
-        cfg = ProviderConfig(provider_key=key, enabled=False, settings=dict(PROVIDERS[key].descriptor.default_settings))
+        descriptor = PROVIDERS[key].descriptor
+        # Keyless, non-sandbox providers (the local estimate) are on by default; keyed providers start disabled.
+        default_enabled = not descriptor.secret_names and not descriptor.is_sandbox
+        cfg = ProviderConfig(provider_key=key, enabled=default_enabled, settings=dict(descriptor.default_settings))
         session.add(cfg)
         session.flush()
     return cfg
@@ -43,11 +46,17 @@ def provider_secrets(session: Session, key: str) -> dict[str, str]:
 def active_providers(session: Session, is_demo: bool) -> list[str]:
     keys = []
     for key, provider in PROVIDERS.items():
-        if provider.descriptor.is_sandbox:
+        d = provider.descriptor
+        if d.is_sandbox:
             if is_demo or get_settings().demo_mode:
                 keys.append(key)
             continue
         cfg = session.get(ProviderConfig, key)
+        if not d.secret_names:
+            # Keyless providers (the local assessment/sale estimate) run for every property unless explicitly disabled.
+            if cfg is None or cfg.enabled:
+                keys.append(key)
+            continue
         if cfg and cfg.enabled and not provider.missing_secrets(provider_secrets(session, key)):
             keys.append(key)
     return keys
@@ -61,12 +70,18 @@ def build_subject(session: Session, prop: Property, config: dict) -> ValuationSu
         zip_code = gis.raw_codes["LOC_ZIP"][:5]
     baths = snap.value("full_baths")
     half = snap.value("half_baths")
+    from app.common.parsing import parse_date
+
+    last_sale = snap.value("last_sale_date")
     return ValuationSubject(
         property_id=prop.id, county=prop.county, parcel=prop.parcel_normalized,
         street=snap.value("site_address") or prop.property_address,
         city=(prop.municipality or "").title() or None, zip_code=zip_code, category=snap.value("category"),
         bedrooms=snap.value("bedrooms"), bathrooms=(baths or 0) + 0.5 * (half or 0) if baths else None,
         square_feet=snap.value("living_area_sqft") or snap.value("base_area_sqft"),
+        assessed_value=snap.value("assessed_value"),
+        last_sale_price=snap.value("last_sale_price"),
+        last_sale_date=last_sale if not isinstance(last_sale, str) else parse_date(last_sale),
     )
 
 

@@ -8,7 +8,7 @@ from datetime import date
 from app.enums import CoverageStatus, EstimateType
 
 PROVIDER_LABELS = {"attom": "ATTOM AVM", "rentcast": "RentCast AVM", "zillow_bridge": "Zillow Zestimate (Bridge)",
-                   "sandbox": "SANDBOX AVM"}
+                   "local_estimate": "Local estimate (assessment/sale)", "sandbox": "SANDBOX AVM"}
 
 
 @dataclass
@@ -68,13 +68,16 @@ def select_valuation(estimates: list[EstimateView], config: dict, is_demo: bool,
             return False, f"address match {e.match_score:.2f} < {min_match}"
         return True, ""
 
+    # local_estimate is a keyless fallback (assessment×CLR / indexed sale); it is used only when no market source
+    # (a real AVM or a value the user recorded) is available, so it never drags down the "lowest credible" pool.
     considered = []
     usable_list: list[EstimateView] = []
+    fallback_list: list[EstimateView] = []
     for e in estimates:
         ok, why = usable(e)
         considered.append(f"{e.label}: {_money(e.point)}" + ("" if ok else f" (excluded: {why})"))
         if ok:
-            usable_list.append(e)
+            (fallback_list if e.provider_key == "local_estimate" else usable_list).append(e)
 
     if strategy == "primary_then_lowest":
         for key in config.get("primary_providers", ["attom", "rentcast", "zillow_bridge"]) + (["sandbox"] if is_demo else []):
@@ -95,6 +98,14 @@ def select_valuation(estimates: list[EstimateView], config: dict, is_demo: bool,
             lowest.point, "lowest_credible", lowest.provider_key, lowest.estimate_type, lowest.id,
             f"Lowest credible published estimate: {lowest.label} {_money(lowest.point)} "
             f"({lowest.estimate_type}). Considered: {'; '.join(considered)}",
+        )
+
+    if fallback_list:
+        best = max(fallback_list, key=lambda e: e.confidence or 0)
+        return Selection(
+            best.point, best.estimate_type, best.provider_key, best.estimate_type, best.id,
+            f"Local estimate ({best.estimate_type.replace('_', ' ')}) {_money(best.point)} — no market AVM or recorded value "
+            f"available, so this keyless estimate is used. Considered: {'; '.join(considered)}",
         )
 
     if not estimates:

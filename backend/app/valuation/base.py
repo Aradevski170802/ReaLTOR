@@ -55,6 +55,9 @@ class ValuationSubject:
     bedrooms: int | None = None
     bathrooms: float | None = None
     square_feet: float | None = None
+    assessed_value: float | None = None
+    last_sale_price: float | None = None
+    last_sale_date: date | None = None
 
     @property
     def one_line(self) -> str:

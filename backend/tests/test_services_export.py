@@ -79,7 +79,11 @@ def test_montco_enrichment_flow_and_refresh(db):
         # The county GIS record has a blank LOC_ZIP for this parcel, so no ZIP is invented and the value is marked estimated.
         assert duplex.value("full_location") == "1002 DEKALB ST, Bridgeport, PA"
         assert duplex.cell("full_location").quality == "estimated"
-        assert duplex.value("selected_valuation") is None and duplex.prop.decision_status == Decision.INSUFFICIENT
+        # The keyless local estimate now values every property automatically: assessed $66,700 x CLR factor 2.02.
+        assert duplex.value("selected_valuation") == 134700
+        assert duplex.cell("selected_valuation").quality == "estimated"
+        assert "Local estimate" in (duplex.cell("valuation_detail").value or "")
+        assert duplex.prop.decision_status == Decision.NOT_INTERESTED  # below the $200k threshold
         tasks = db.scalars(select(CaptureTask).where(CaptureTask.property_id == duplex.prop.id)).all()
         assert {t.source_key for t in tasks} == {"montco.recorder", "montco.civil"}
 

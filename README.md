@@ -199,6 +199,8 @@ Nothing is ever bypassed. Full details: [docs/SOURCE_ACCESS.md](docs/SOURCE_ACCE
 | Delaware | Recorder of Deeds (publicsearch.us, countyweb guest) | User-assisted | publicsearch robots.txt allows only the home page; countyweb needs a guest login plus disclaimer |
 | Delaware | Civil public access (party search) | User-assisted | "Continue as public user" agreement. The app derives the party-name searches (LAST FIRST MI, or company). |
 | Delaware | Treasurer bill lookup | User-assisted | Payment-portal flow |
+| Both | **Market valuation** | **Automated for every property (keyless)** | A built-in *Local estimate* values each property with no API key: assessed value × the county STEB Common Level Ratio factor (editable per county), or a recent arm's-length sale grown by an appreciation rate. A licensed AVM (ATTOM/RentCast) or a value you record yourself overrides it when present. |
+| Both | Recorder of Deeds (mortgages) & civil/lien search | User-assisted | Recorder sites are stateful JavaScript apps behind a guest login; the Montgomery court search is behind a Cloudflare human-verification gate. Export/paste the results and the app does the mortgage↔satisfaction matching automatically. |
 
 **Credentials found in supplied notes.** `Montco info.txt` contains a Recorder of Deeds username and password. They are deliberately **not** used anywhere in this project. Change that password, since it has been stored in a plain text file.
 

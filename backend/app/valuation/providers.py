@@ -268,8 +268,88 @@ class SandboxProvider(ValuationProvider):
         )
 
 
+# ------------------------------------------------------------------------------------------ Local estimate (free, no key)
+
+
+class LocalEstimateProvider(ValuationProvider):
+    """Keyless market-value estimate for every property, from data already on hand — no API, no per-call cost.
+
+    Two standard Pennsylvania methods, best-of:
+      * Assessment ratio: market ≈ assessed value × the county's STEB Common Level Ratio (CLR) factor. The factor is
+        editable per county in Settings; PA publishes it annually. This runs for every parcel that has an assessed value.
+      * Indexed sale: when there is a recent arm's-length sale, market ≈ sale price grown by an annual appreciation rate.
+    Both are clearly labelled estimates (not appraisals) with the method and factor shown, and low confidence so a real
+    AVM (ATTOM/RentCast) or a value you record yourself always takes precedence in the selector.
+    """
+
+    DEFAULTS = {
+        # Editable in Settings. Verify against the current STEB Common Level Ratio for each county.
+        # Montgomery has not reassessed since 1998 (assessed << market) so its factor is high; Delaware reassessed
+        # effective 2021 (assessed ~ market) so its factor is near 1.
+        "factors": {"montco": 2.02, "delco": 1.40},
+        "default_factor": 1.60,
+        "annual_appreciation": 0.05,
+        "max_sale_age_years": 20,
+        "min_sale_price": 5000,
+    }
+    descriptor = ProviderDescriptor(
+        key="local_estimate",
+        name="Local estimate (assessment ratio / indexed sale)",
+        product="Keyless PA valuation from assessed value and last sale",
+        estimate_types=(EstimateType.ASSESSMENT_RATIO, EstimateType.SALE_ESTIMATE),
+        docs_url="https://www.pa.gov/agencies/steb.html",
+        secret_names=(),
+        setup_steps=("Runs automatically for every property — no API key needed.",
+                     "Set each county's current Common Level Ratio factor under Settings → Valuation providers if you want to fine-tune it."),
+        coverage_notes="Covers every property that has an assessed value (from the county or the sale list). It is an estimate, not an appraisal.",
+        terms_notes="Derived from public assessed values and the state Common Level Ratio; no third-party data or API is used.",
+        default_settings=DEFAULTS,
+    )
+
+    def estimate(self, subject: ValuationSubject, secrets: dict[str, str], settings: dict) -> ValuationResult:
+        cfg = {**self.DEFAULTS, **(settings or {})}
+        factors = {**self.DEFAULTS["factors"], **(cfg.get("factors") or {})}
+        factor = factors.get(subject.county, cfg.get("default_factor"))
+        candidates: list[tuple[float, str, str, float]] = []  # (point, estimate_type, note, confidence)
+
+        if subject.assessed_value and factor:
+            clr = round(subject.assessed_value * float(factor) / 100) * 100
+            candidates.append((clr, EstimateType.ASSESSMENT_RATIO,
+                               f"Assessed ${subject.assessed_value:,.0f} × CLR factor {factor} (editable in Settings)", 0.45))
+
+        if subject.last_sale_price and subject.last_sale_price >= cfg["min_sale_price"] and subject.last_sale_date:
+            years = (date.today() - subject.last_sale_date).days / 365.25
+            if 0 <= years <= cfg["max_sale_age_years"]:
+                appr = float(cfg["annual_appreciation"])
+                indexed = round(subject.last_sale_price * (1 + appr) ** years / 100) * 100
+                conf = 0.55 if years <= 8 else 0.4
+                note = f"${subject.last_sale_price:,.0f} sale on {subject.last_sale_date:%m/%d/%Y} grown {appr:.0%}/yr for {years:.0f} yr"
+                # Prefer the indexed sale only when it is sane relative to the assessment estimate.
+                clr_point = candidates[0][0] if candidates else None
+                if clr_point is None or 0.5 * clr_point <= indexed <= 3 * clr_point:
+                    candidates.insert(0, (indexed, EstimateType.SALE_ESTIMATE, note, conf))
+                else:
+                    candidates.append((indexed, EstimateType.SALE_ESTIMATE, note + " (diverges from assessment; not selected)", 0.25))
+
+        if not candidates:
+            reason = "No assessed value available to estimate from" if not subject.assessed_value else "No county CLR factor configured"
+            return ValuationResult.status_only(CoverageStatus.NO_MATCH, reason)
+
+        point, est_type, note, conf = candidates[0]
+        payload = {"method": est_type, "point": point, "factor": factor, "assessed": subject.assessed_value,
+                   "candidates": [{"point": p, "type": t, "note": n} for p, t, n, _ in candidates]}
+        return ValuationResult(
+            coverage_status=CoverageStatus.MATCHED, estimate_type=est_type, point=point,
+            low=round(point * 0.85 / 100) * 100, high=round(point * 1.15 / 100) * 100, estimate_date=date.today(),
+            confidence=conf, confidence_label="local estimate", match_score=1.0, matched_address=subject.one_line,
+            notes=note,
+            evidence=EvidenceDraft(url=None, content=json.dumps(payload).encode(), content_type="application/json",
+                                   request_summary=f"local estimate ({est_type}) for parcel {subject.parcel}", entry_method="automated"),
+        )
+
+
 PROVIDERS: dict[str, ValuationProvider] = {
-    p.descriptor.key: p for p in (AttomProvider(), RentCastProvider(), ZillowBridgeProvider(), SandboxProvider())
+    p.descriptor.key: p for p in (AttomProvider(), RentCastProvider(), ZillowBridgeProvider(), LocalEstimateProvider(), SandboxProvider())
 }
 
 # Reference-workbook valuation columns that users may fill with values they looked up themselves.
