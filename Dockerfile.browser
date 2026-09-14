@@ -1,0 +1,38 @@
+# Browser-enabled image: everything in the default image PLUS Playwright + Chromium, so the in-process worker can
+# drive public, no-CAPTCHA county portals (Delaware C-Track civil liens). ~700 MB larger than the default image and
+# needs >=1 GB RAM, so it is NOT for Render's free tier — use it on an always-free VM (see docs/DEPLOYMENT_BROWSER.md):
+#   docker build -f Dockerfile.browser -t upset-sale-intel-browser .
+#   docker run -p 8000:8000 -e USI_MASTER_KEY=<long random> -e USI_SITE_PASSWORD=<pw> \
+#              -e USI_BROWSER_AUTOMATION=true -e USI_AUTO_ACCEPT_TERMS=true upset-sale-intel-browser
+
+FROM node:22-alpine AS web
+WORKDIR /web
+COPY frontend/package.json frontend/package-lock.json ./
+RUN npm ci
+COPY frontend/ ./
+RUN npm run build
+
+# Playwright's Python base image ships Chromium and all of its OS dependencies preinstalled.
+FROM mcr.microsoft.com/playwright/python:v1.44.0-jammy
+# Tesseract enables OCR for image-only PDF pages.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends tesseract-ocr \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app/backend
+COPY backend/requirements.txt backend/requirements-browser.txt ./
+RUN pip install --no-cache-dir -r requirements.txt -r requirements-browser.txt
+
+COPY backend/ ./
+COPY --from=web /web/dist /app/frontend/dist
+RUN useradd --create-home usi && mkdir -p /app/data && chown -R usi:usi /app
+USER usi
+
+ENV PYTHONUNBUFFERED=1 \
+    USI_APP_ENV=production \
+    USI_DATA_DIR=/app/data \
+    USI_BROWSER_AUTOMATION=true \
+    PORT=8000
+
+EXPOSE 8000
+CMD ["python", "scripts/serve.py"]

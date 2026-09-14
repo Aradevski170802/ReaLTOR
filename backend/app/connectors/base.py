@@ -124,6 +124,7 @@ class PropertyRef:
 class SourceAdapter(ABC):
     descriptor: SourceDescriptor
     parser_version = "1"
+    browser_capable = False  # set True and implement browse() for portals drivable by a real browser (no CAPTCHA)
 
     def lookup(self, prop: PropertyRef, secrets: dict[str, str] | None = None) -> SourceOutcome:
         """Automated retrieval. User-assisted adapters return USER_ACTION with a capture request."""
@@ -132,6 +133,14 @@ class SourceAdapter(ABC):
             message=f"{self.descriptor.name} requires a user-assisted step ({self.descriptor.compliance_status})",
             capture=self.capture_request(prop),
         )
+
+    def browse(self, runner, prop: PropertyRef, secrets: dict[str, str] | None = None) -> SourceOutcome:
+        """Drive the source with a real browser (BrowserRunner). Only called for browser_capable adapters."""
+        raise NotImplementedError
+
+    def browser_ready(self, secrets: dict[str, str] | None = None) -> tuple[bool, str]:
+        """Whether browse() can run now (e.g. any required credentials are present)."""
+        return (True, "") if self.browser_capable else (False, "not browser-capable")
 
     def capture_request(self, prop: PropertyRef) -> CaptureRequest | None:
         return None

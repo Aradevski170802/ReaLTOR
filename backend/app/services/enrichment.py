@@ -286,6 +286,58 @@ def enrich_property(session: Session, prop: Property, *, actor: str = "system", 
     connector = get_connector(prop.county)
     summary: dict[str, str] = {}
     wanted = set(source_keys) if source_keys else None
+    runner_box: dict[str, object] = {}  # lazily-created shared BrowserRunner for this property
+    try:
+        _enrich_sources(session, prop, connector, wanted, force, job_id, actor, summary, runner_box)
+    finally:
+        runner = runner_box.get("runner")
+        if runner is not None:
+            try:
+                runner.__exit__(None, None, None)
+            except Exception:  # noqa: BLE001
+                log.debug("browser runner teardown failed", exc_info=True)
+
+    config = active_ruleset(session).config
+    if run_valuation:
+        from app.services.valuation_service import run_valuations
+
+        run_valuations(session, prop, config, actor=actor, force=force)
+    prop.last_enriched_at = utcnow()
+    session.flush()
+    evaluate_properties(session, [prop.id], actor)
+    return summary
+
+
+def _browser_secrets(session: Session, adapter: SourceAdapter) -> dict[str, str]:
+    from app.security.secrets import get_secret
+
+    out: dict[str, str] = {}
+    for name in getattr(adapter, "credential_secrets", ()):  # e.g. site.<key>.username / .password
+        value = get_secret(session, name)
+        if value:
+            out[name] = value
+    return out
+
+
+def _run_browser_source(session: Session, prop: Property, adapter: SourceAdapter, runner_box: dict, actor: str,
+                        job_id: int | None) -> str:
+    from app.connectors.browser import BrowserRunner
+
+    secrets = _browser_secrets(session, adapter)
+    if runner_box.get("runner") is None:
+        runner_box["runner"] = BrowserRunner().__enter__()
+    try:
+        outcome = adapter.browse(runner_box["runner"], property_ref(prop), secrets)
+    except Exception as exc:  # noqa: BLE001
+        log.exception("Browser source %s failed for property %s", adapter.descriptor.key, prop.id)
+        outcome = SourceOutcome(LookupStatus.UNEXPECTED, f"Browser automation error: {type(exc).__name__}: {exc}")
+    persist_outcome(session, prop, adapter, outcome, entry_method=EntryMethod.AUTOMATED, actor=actor, job_id=job_id)
+    return outcome.status
+
+
+def _enrich_sources(session: Session, prop: Property, connector, wanted, force, job_id, actor, summary, runner_box) -> None:
+    from app.connectors.browser import browser_available
+
     for adapter in connector.sources():
         d = adapter.descriptor
         if wanted is not None and d.key not in wanted:
@@ -318,10 +370,24 @@ def enrich_property(session: Session, prop: Property, *, actor: str = "system", 
                 ensure_capture_task(session, prop, connector.source("montco.assessment_portal"), "gis_unavailable")
         else:
             default = d.key in DEFAULT_CAPTURE.get(prop.county, [])
-            if wanted is None and not default:
+            if wanted is None and not default and not adapter.browser_capable:
                 continue
             if _has_capture(session, prop.id, d.key) and not force:
                 summary[d.key] = "captured"
+                continue
+            # Prefer real-browser automation for sources that support it (public, no-CAPTCHA portals).
+            if adapter.browser_capable and browser_available():
+                ready, why = adapter.browser_ready(_browser_secrets(session, adapter))
+                if ready:
+                    if not force and _fresh_success(session, prop.id, d.key, d.cache_ttl_hours):
+                        summary[d.key] = "cached"
+                        continue
+                    summary[d.key] = _run_browser_source(session, prop, adapter, runner_box, actor, job_id)
+                    continue
+                summary[d.key] = "needs_credentials"
+                ensure_capture_task(session, prop, adapter, "needs_credentials")
+                continue
+            if wanted is None and not default:
                 continue
             ensure_capture_task(session, prop, adapter, "enrichment")
             if not session.scalar(select(SourceLookup.id).where(SourceLookup.property_id == prop.id, SourceLookup.source_key == d.key,
@@ -330,16 +396,6 @@ def enrich_property(session: Session, prop: Property, *, actor: str = "system", 
                                 f"{d.name}: user-assisted step required ({d.compliance_status})"),
                                 entry_method=EntryMethod.AUTOMATED, actor=actor, job_id=job_id)
             summary[d.key] = LookupStatus.USER_ACTION
-
-    config = active_ruleset(session).config
-    if run_valuation:
-        from app.services.valuation_service import run_valuations
-
-        run_valuations(session, prop, config, actor=actor, force=force)
-    prop.last_enriched_at = utcnow()
-    session.flush()
-    evaluate_properties(session, [prop.id], actor)
-    return summary
 
 
 def submit_capture(session: Session, prop: Property, source_key: str, content: str, actor: str, *, no_results: bool = False,

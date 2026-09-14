@@ -1,0 +1,6 @@
+# Optional: real-browser automation for public, no-CAPTCHA county portals (currently Delaware C-Track civil liens).
+# Install on top of requirements.txt ONLY on a host that can run Chromium (a VM or your own PC — not Render's free tier):
+#   pip install -r requirements.txt -r requirements-browser.txt
+#   playwright install --with-deps chromium
+# Then set USI_BROWSER_AUTOMATION=true. See docs/DEPLOYMENT_BROWSER.md.
+playwright>=1.44

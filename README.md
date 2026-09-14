@@ -31,7 +31,7 @@ The app takes a county upset-sale PDF and runs the full research workflow on it:
 - [Repository layout](#repository-layout)
 - [Known limitations and items to verify](#known-limitations-and-items-to-verify)
 
-Further reading: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/SOURCE_ACCESS.md](docs/SOURCE_ACCESS.md), [docs/WALKTHROUGH.md](docs/WALKTHROUGH.md).
+Further reading: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/SOURCE_ACCESS.md](docs/SOURCE_ACCESS.md), [docs/WALKTHROUGH.md](docs/WALKTHROUGH.md), [docs/DEPLOYMENT_BROWSER.md](docs/DEPLOYMENT_BROWSER.md).
 
 ---
 
@@ -197,10 +197,11 @@ Nothing is ever bypassed. Full details: [docs/SOURCE_ACCESS.md](docs/SOURCE_ACCE
 | Delaware | **Official ArcGIS `Parcels_Public_Access`** | Automated | Folio → site address, legal description, GIS acreage (marked as an estimate), and the county's own assessment-page link |
 | Delaware | Real Estate & Tax Records portal (Site Location, Property Type, School District, Residential/Commercial building detail, Delinquent Tax) | **Automated** once terms are acknowledged | The disclaimer is a one-click liability waiver (no login, no active CAPTCHA), and delcorealestate has no robots.txt restriction. After an admin acknowledges the terms, the app accepts it automatically and reads each parcel's data tabs. Falls back to user-assisted capture if a human check ever appears. |
 | Delaware | Recorder of Deeds (publicsearch.us, countyweb guest) | User-assisted | publicsearch robots.txt allows only the home page; countyweb needs a guest login plus disclaimer |
-| Delaware | Civil public access (party search) | User-assisted | "Continue as public user" agreement. The app derives the party-name searches (LAST FIRST MI, or company). |
+| Delaware | Civil public access — C-Track (party search for **liens**) | **Automated with a real browser when enabled**; otherwise user-assisted | Public access is a plain "CONTINUE AS PUBLIC USER" click — no login, no CAPTCHA. When `USI_BROWSER_AUTOMATION=true`, the app drives it with Chromium, runs a Party Search per derived name (LAST, FIRST MI, or company), and keeps only "Lien" cases (flagged for review). Off by default / on Render free it falls back to a capture task. See [docs/DEPLOYMENT_BROWSER.md](docs/DEPLOYMENT_BROWSER.md). |
 | Delaware | Treasurer bill lookup | User-assisted | Payment-portal flow |
 | Both | **Market valuation** | **Automated for every property (keyless)** | A built-in *Local estimate* values each property with no API key: assessed value × the county STEB Common Level Ratio factor (editable per county), or a recent arm's-length sale grown by an appreciation rate. A licensed AVM (ATTOM/RentCast) or a value you record yourself overrides it when present. |
-| Both | Recorder of Deeds (mortgages) & civil/lien search | User-assisted | Recorder sites are stateful JavaScript apps behind a guest login; the Montgomery court search is behind a Cloudflare human-verification gate. Export/paste the results and the app does the mortgage↔satisfaction matching automatically. |
+| Both | Recorder of Deeds (mortgages) | User-assisted with **your own account** | Recorder sites are stateful JavaScript apps behind a login (guest access was withdrawn). Export/paste the results and the app does the mortgage↔satisfaction matching automatically. |
+| Montgomery | Civil/lien court search (PSI) | User-assisted | Behind a Cloudflare "verify you are human" gate with no bulk/API data, which is never bypassed. (Delaware liens *are* automated — see the C-Track row above.) |
 
 **Credentials found in supplied notes.** `Montco info.txt` contains a Recorder of Deeds username and password. They are deliberately **not** used anywhere in this project. Change that password, since it has been stored in a plain text file.
 
@@ -250,6 +251,8 @@ Copy `.env.example` to `.env` (repository root or `backend/`).
 | `USI_TESSERACT_CMD` | on PATH | Path to `tesseract.exe` for OCR |
 | `USI_PUBLIC_BASE_URL` | `http://localhost:8000` | Absolute links in exported workbooks |
 | `USI_AUTO_MIGRATE` | `true` | Run Alembic migrations on API start-up |
+| `USI_BROWSER_AUTOMATION` | `false` | Drive public, no-CAPTCHA portals (Delaware C-Track liens) with Chromium. Needs Playwright + Chromium and ~1 GB RAM (not Render free). See [docs/DEPLOYMENT_BROWSER.md](docs/DEPLOYMENT_BROWSER.md) |
+| `USI_BROWSER_HEADLESS` / `USI_BROWSER_TIMEOUT_SECONDS` | `true` / `45` | Browser automation tuning |
 
 ---
 
@@ -348,8 +351,13 @@ Every push to the default branch redeploys automatically.
 - **Sleeps when idle.** The service sleeps after about 15 minutes idle, so the first visit afterwards takes about a minute.
 - **Nothing persists.** The disk is temporary: uploaded PDFs, results, and API keys entered in Settings are wiped on every restart or redeploy. The demo projects are recreated each time.
 - **Daily refresh only while awake.** The scheduled refresh runs only while the service is awake.
+- **No browser automation.** Chromium doesn't fit in the free instance's 512 MB, so Delaware liens fall back to user-assisted capture here.
 
 For persistent use, move to a paid instance with a disk or a Render PostgreSQL database: set `USI_DATABASE_URL`, and set `USI_DATA_DIR` to the disk mount. The site password uses the browser's Basic authentication, so keep `USI_AUTH_MODE=local` while it is enabled.
+
+### Automate Delaware liens for free (browser worker)
+
+Delaware civil liens can be filled in automatically by driving the county's public **C-Track** portal (no login, no CAPTCHA) with Chromium. That needs ~1 GB RAM, more than Render's free tier gives, so run it on a box that fits Chromium — your own PC for on-demand batches, or a free **Oracle Cloud Always Free** VM for 24/7. Full instructions, including a ready `Dockerfile.browser`: [docs/DEPLOYMENT_BROWSER.md](docs/DEPLOYMENT_BROWSER.md).
 
 ---
 

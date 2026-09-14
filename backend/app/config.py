@@ -40,6 +40,12 @@ class Settings(BaseSettings):
     public_base_url: str = "http://localhost:8000"
     auto_migrate: bool = True
 
+    # Browser automation (real Chromium via Playwright) for public no-CAPTCHA portals — off by default; needs
+    # `pip install playwright` + `playwright install chromium`. Enable on a machine/instance that can run a browser.
+    browser_automation: bool = False
+    browser_headless: bool = True
+    browser_timeout_seconds: float = 45.0
+
     # Deployment
     site_username: str = "demo"
     site_password: str | None = None  # when set, HTTP Basic auth protects the whole site except /api/health

@@ -9,6 +9,7 @@ Rules applied to every source:
 - Terms that restrict use require a recorded administrator acknowledgement.
 - Anything behind a disclaimer, login or human verification becomes a **user-assisted capture task**.
 - CAPTCHAs, logins and paywalls are never bypassed. Credentials are never stored or automated.
+- **Real-browser automation** (Playwright + Chromium) is used only for public portals whose sole "gate" is a plain "continue as public user" / disclaimer click with **no CAPTCHA and no anti-bot challenge** — the app opens the page the way a person's browser does and reads the public results. It is never pointed at a source protected by a CAPTCHA, Cloudflare Turnstile or "verify you are human" step. It is **off by default** (`USI_BROWSER_AUTOMATION=false`) and only runs where Chromium is installed; otherwise those sources fall back to user-assisted capture. See [DEPLOYMENT_BROWSER.md](DEPLOYMENT_BROWSER.md).
 
 ## Montgomery County, Pennsylvania
 
@@ -29,7 +30,7 @@ Rules applied to every source:
 | Treasurer tax payments | `https://www.delcopa.gov/treasurer/paytaxes` | Pay → Continue payment-portal flow. | **User-assisted** (`delco.treasurer`). The app never enters the payment flow. |
 | Recorder public search | `https://delaware.pa.publicsearch.us/` | robots.txt `Allow: /$`, `Disallow: /` (home page only). | **User-assisted** (`delco.recorder_publicsearch`). |
 | Recorder guest search | `https://delcorodonlineservices.co.delaware.pa.us/countyweb/search/searchMain.do?defaultType=Public` | "Login as Guest" plus disclaimer acceptance. | **User-assisted** (`delco.recorder_countyweb`), the default recorder task. |
-| Civil public access | `https://delcopublicaccess.co.delaware.pa.us/` | "Continue as public user" single-page app. | **User-assisted** (`delco.civil`). Party names are derived automatically (LAST FIRST MI, trusts split into person plus entity, companies by name). Only cases whose Case Classification includes "Lien" are kept. |
+| Civil public access (C-Track) | `https://delcopublicaccess.co.delaware.pa.us/` | 2026-09-14: public access is a plain **"CONTINUE AS PUBLIC USER"** click — **no login, no CAPTCHA, no robots.txt restriction**. Party Search returns a grid (Case Number, Case Classification, Case Filed Date, Party Name, Party Role); classifications include "Municipal Lien" etc. | **Automated with a real browser when browser automation is enabled** (`delco.civil`). The app performs the public-user click and runs one Party Search per derived name (LAST, FIRST MI; trusts split into person plus entity; companies by name), keeping only cases whose Case Classification includes "Lien". Name matches are not identity matches, so every retained lien case is flagged for review. When browser automation is off (the default, and on hosts without Chromium) it falls back to a user-assisted capture task. See [DEPLOYMENT_BROWSER.md](DEPLOYMENT_BROWSER.md). |
 
 ## Valuation and imagery
 
