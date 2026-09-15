@@ -61,9 +61,13 @@ goes. You can watch progress on the project's **Jobs** page.
 
 ## Option 2 — Oracle Cloud Always Free VM (recommended for 24/7)
 
+> **Full step-by-step runbook: [DEPLOY_ORACLE.md](DEPLOY_ORACLE.md)** — start there for a colleague-ready walkthrough
+> (create the VM, both firewalls, secrets, build, run, updates, optional HTTPS). The summary below is the short version.
+
 Oracle Cloud's **Always Free** tier includes small VMs (an AMD `VM.Standard.E2.1.Micro`, or an Arm Ampere shape with
 up to 4 OCPU / 24 GB) that run indefinitely at no cost — enough to host the whole app *and* Chromium and keep the
-daily refresh running. This gives the boss one always-on URL with Delaware liens automated.
+daily refresh running. This gives the boss one always-on URL with Delaware liens automated. **Pick the Ampere shape** —
+Chromium needs ~1 GB RAM, more than the micro comfortably has.
 
 1. Create an Always Free VM (Ubuntu 22.04) and open port 8000 (or 80/443 behind a reverse proxy) in its security list.
 2. Install Docker, clone the repo, and build the **browser image**:
