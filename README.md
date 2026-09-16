@@ -351,7 +351,7 @@ Every push to the default branch redeploys automatically.
 
 **Free-plan limits:**
 - **Sleeps when idle.** The service sleeps after about 15 minutes idle, so the first visit afterwards takes about a minute.
-- **Nothing persists.** The disk is temporary: uploaded PDFs, results, and API keys entered in Settings are wiped on every restart or redeploy. The demo projects are recreated each time.
+- **Nothing persists by default.** The disk is temporary. Point `USI_DATABASE_URL` at a free [Neon](https://neon.tech) Postgres (no card) to keep projects, properties and results across restarts — see [docs/DEPLOY_RENDER.md](docs/DEPLOY_RENDER.md) for the full no‑credit‑card walkthrough (Render + Neon + ATTOM key).
 - **Daily refresh only while awake.** The scheduled refresh runs only while the service is awake.
 - **No browser automation.** Chromium doesn't fit in the free instance's 512 MB, so Delaware liens fall back to user-assisted capture here.
 
@@ -359,10 +359,10 @@ For persistent use, move to a paid instance with a disk or a Render PostgreSQL d
 
 ### Automate Delaware liens for free (browser worker)
 
-Delaware civil liens and Montgomery MDJ judgments can be filled in automatically by driving public, no-CAPTCHA portals with Chromium. That needs ~1 GB RAM, more than Render's free tier gives, so run it on a box that fits Chromium. Free, no-credit-card options, easiest first:
+Delaware civil liens and Montgomery MDJ judgments are filled in by driving public, no-CAPTCHA portals with Chromium, which needs ~1 GB RAM — more than a free web host gives. Where to run each part:
 
-- **Hugging Face Spaces** — free CPU tier (16 GB RAM, no card); runs the full app with browser automation and gives a 24/7 URL: [docs/DEPLOY_HUGGINGFACE.md](docs/DEPLOY_HUGGINGFACE.md).
-- **Your own PC** (on-demand batches) or an **Oracle Cloud Always Free VM** (24/7): [docs/DEPLOYMENT_BROWSER.md](docs/DEPLOYMENT_BROWSER.md) and [docs/DEPLOY_ORACLE.md](docs/DEPLOY_ORACLE.md).
+- **The site, 24/7, free, no credit card:** [Render](https://render.com) free + a free [Neon](https://neon.tech) Postgres. All the API-based automation (ATTOM, taxes, GIS, valuation) runs there; the two browser sources become a manual/step-in step. See [docs/DEPLOY_RENDER.md](docs/DEPLOY_RENDER.md).
+- **The browser automation (Chromium):** your own PC on demand (against the same Neon database) — [docs/DEPLOY_RENDER.md](docs/DEPLOY_RENDER.md#filling-in-liensjudgments) — or a 24/7 box that fits Chromium: an [Oracle Cloud Always Free VM](docs/DEPLOY_ORACLE.md) (free but currently asks for a card) or [Hugging Face PRO](docs/DEPLOY_HUGGINGFACE.md) (paid). General notes: [docs/DEPLOYMENT_BROWSER.md](docs/DEPLOYMENT_BROWSER.md).
 
 ---
 

@@ -29,9 +29,10 @@ export USI_BROWSER_AUTOMATION=true      # Windows PowerShell: $env:USI_BROWSER_A
 When it is **off** (the default, and on Render free), Delaware liens simply fall back to a user-assisted capture task
 — nothing breaks, the boss just sees a "search C-Track" to-do instead of the liens filled in automatically.
 
-> **No credit card? Use Hugging Face Spaces.** The free HF CPU Space (16 GB RAM, email signup, no card) runs the whole
-> app *with* browser automation and gives your colleague a 24/7 URL. Full runbook: **[DEPLOY_HUGGINGFACE.md](DEPLOY_HUGGINGFACE.md)**.
-> (Oracle's "always free" VM below is also free but currently asks for a card to verify.)
+> **No credit card?** Host the **site** on **[Render free + Neon](DEPLOY_RENDER.md)** (no card) — all the API-based
+> automation runs there, and you run the **browser** part (Chromium) from your own PC against the same database when you
+> want liens/judgments filled. There is currently no free, no-card host that also runs Chromium 24/7: Oracle's "always
+> free" VM (below) asks for a card to verify, and Hugging Face now requires a paid PRO plan for Docker Spaces.
 
 Optional tuning: `USI_BROWSER_HEADLESS=true` (default), `USI_BROWSER_TIMEOUT_SECONDS=45`.
 

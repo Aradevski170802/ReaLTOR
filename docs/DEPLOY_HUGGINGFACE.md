@@ -1,8 +1,15 @@
-# Run the site 24/7 for free on Hugging Face Spaces (no credit card)
+# Run the site 24/7 on Hugging Face Spaces
 
-Hugging Face's free CPU Space gives you 2 vCPUs and **16 GB of RAM** with **no credit card** — enough to run the whole
-app *including* the browser automation (Delaware C-Track liens + Montgomery UJS judgments). Your colleague gets a clean
-URL like `https://your-name-usi.hf.space`, protected by a password you set. Plan on ~20 minutes.
+> **⚠️ No longer free (changed 2026).** Hugging Face now requires a paid **PRO** plan to create **Docker** or Gradio
+> Spaces — only *Static* Spaces stay free, and a Static Space can't run this app. So this route only works if you have (or
+> buy) HF PRO. **If you don't want to pay, use [DEPLOY_RENDER.md](DEPLOY_RENDER.md) instead** (free, no credit card).
+>
+> The rest of this guide still applies **if you have a PRO plan** — a PRO Docker Space (16 GB RAM) runs the whole app
+> including the browser automation.
+
+Hugging Face's PRO CPU Space gives you 2 vCPUs and **16 GB of RAM** — enough to run the whole app *including* the browser
+automation (Delaware C-Track liens + Montgomery UJS judgments). Your colleague gets a clean URL like
+`https://your-name-usi.hf.space`, protected by a password you set. Plan on ~20 minutes.
 
 Two small files do all the work: a `Dockerfile` that clones the app from GitHub and installs Chromium, and a `README.md`
 that configures the Space. Both are in [`deploy/hf/`](../deploy/hf/).
