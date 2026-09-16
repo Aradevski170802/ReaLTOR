@@ -359,7 +359,10 @@ For persistent use, move to a paid instance with a disk or a Render PostgreSQL d
 
 ### Automate Delaware liens for free (browser worker)
 
-Delaware civil liens can be filled in automatically by driving the county's public **C-Track** portal (no login, no CAPTCHA) with Chromium. That needs ~1 GB RAM, more than Render's free tier gives, so run it on a box that fits Chromium — your own PC for on-demand batches, or a free **Oracle Cloud Always Free** VM for 24/7. Full instructions, including a ready `Dockerfile.browser`: [docs/DEPLOYMENT_BROWSER.md](docs/DEPLOYMENT_BROWSER.md).
+Delaware civil liens and Montgomery MDJ judgments can be filled in automatically by driving public, no-CAPTCHA portals with Chromium. That needs ~1 GB RAM, more than Render's free tier gives, so run it on a box that fits Chromium. Free, no-credit-card options, easiest first:
+
+- **Hugging Face Spaces** — free CPU tier (16 GB RAM, no card); runs the full app with browser automation and gives a 24/7 URL: [docs/DEPLOY_HUGGINGFACE.md](docs/DEPLOY_HUGGINGFACE.md).
+- **Your own PC** (on-demand batches) or an **Oracle Cloud Always Free VM** (24/7): [docs/DEPLOYMENT_BROWSER.md](docs/DEPLOYMENT_BROWSER.md) and [docs/DEPLOY_ORACLE.md](docs/DEPLOY_ORACLE.md).
 
 ---
 
